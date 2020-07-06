@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
+ * Rodolfo
+ * A class grade helper.
  *
  * @format
  * @flow strict-local
@@ -10,9 +10,9 @@ import React, { useState, useEffect } from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {StatusBar, Keyboard} from 'react-native';
 
-import api from './services/api';
-import getRealm from './services/realm';
-import Repository from './components/Repository/index';
+import api from '../services/api';
+import getRealm from '../services/realm';
+import Repository from '../components/Repository/index';
 
 import {Container, List, Title, Input, Submit, Form} from './styles';
 
