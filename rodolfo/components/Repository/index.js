@@ -15,17 +15,17 @@ const Repository = ({data, onRefresh}) => {
   return (
     <Container>
       <Name>{data.name}</Name>
-      <Description>{data.description}</Description>
+      <Description>{data.goal}</Description>
 
       <Stats>
         <Stat>
           <Icon name="star" size={16} color="#333" />
-          <StatCount>{data.stars}</StatCount>
+          <StatCount>{data.grades}</StatCount>
         </Stat>
 
         <Stat>
           <Icon name="code-fork" size={18} color="#333" />
-          <StatCount>{data.forks}</StatCount>
+          <StatCount>{data.notes}</StatCount>
         </Stat>
       </Stats>
 

@@ -10,22 +10,36 @@ import React, { useState, useEffect } from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {StatusBar, Keyboard} from 'react-native';
 
-import api from '../services/api';
 import getRealm from '../services/realm';
 import Repository from '../components/Repository/index';
 
 import {Container, List, Title, Input, Submit, Form} from './styles';
 
 export default function App() {
-  const [input, setInput] = useState('');
+  const [id, setId] = useState(0);
+  const [materia, setMateria] = useState('');
+  const [goal, setGoal] = useState('');
+  const [grades, setGrades] = useState('');
+  const [notes, setNotes] = useState('');
+  const info = {
+    id,
+    materia,
+    goal,
+    grades,
+    notes,
+  };
   const [error, setError] = useState(false);
   const [repositories, setRepositories] = useState([]);
+
+  function incrementId() {
+    setId(id + 1);
+  }
 
   useEffect(() => {
     async function loadRepositories() {
       const realm = await getRealm();
 
-      const data = realm.objects('Repository').sorted('stars', true);
+      const data = realm.objects('Repository').sorted('id', true);
 
       setRepositories(data);
     }
@@ -33,14 +47,13 @@ export default function App() {
     loadRepositories();
   }, []);
 
-  async function saveRepository(repository) {
+  async function saveRepository(info) {
     const data = {
-      id: repository.id,
-      name: repository.name,
-      fullName: repository.full_name,
-      description: repository.description,
-      stars: repository.stargazers_count,
-      forks: repository.forks_count,
+      id: info.id,
+      name: info.materia,
+      goal: info.goal,
+      grades: info.grades,
+      notes: info.notes,
     };
 
     const realm = await getRealm();
@@ -48,32 +61,26 @@ export default function App() {
     realm.write(() => {
       realm.create('Repository', data, 'modified');
     });
+    incrementId();
     return data;
   }
 
   async function handleAddRepository() {
     try {
-      const response = await api.get(`/repos/${input}`);
-
-      await saveRepository(response.data);
+      saveRepository(info);
       console.log('deu certo');
-      setInput('');
+      console.log(info.id);
+      setMateria('');
+      setGoal('');
+      setGrades('');
+      setNotes('');
       setError(false);
       Keyboard.dismiss();
     } catch (err) {
       setError(true);
-      console.log(input);
+      console.log(JSON.stringify(info));
       console.log('fracasso');
     }
-  }
-
-  async function handleRefreshRepository(repository) {
-    const response = await api.get(`/repos/${repository.fullName}`);
-
-    const data = await saveRepository(response.data);
-    console.log(data.id);
-
-    setRepositories(repositories.map(repo => repo.id === data.id ? data : repo));
   }
 
   return (
@@ -85,16 +92,49 @@ export default function App() {
       />
 
       <Container>
-        <Title>Repositórios</Title>
+        <Title>Rodolfo</Title>
 
         <Form>
           <Input
-            value={input}
+            value={materia}
             error={error}
-            onChangeText={setInput}
+            onChangeText={setMateria}
             autoCapitalize="none"
             autoCorrect={false}
-            placeholder="Procurar repositório"
+            placeholder="Nome da matéria"
+          />
+        </Form>
+
+        <Form>
+          <Input
+            value={goal}
+            error={error}
+            onChangeText={setGoal}
+            autoCapitalize="none"
+            autoCorrect={false}
+            placeholder="Objetivo"
+          />
+        </Form>
+
+        <Form>
+          <Input
+            value={grades}
+            error={error}
+            onChangeText={setGrades}
+            autoCapitalize="none"
+            autoCorrect={false}
+            placeholder="Notas"
+          />
+        </Form>
+
+        <Form>
+          <Input
+            value={notes}
+            error={error}
+            onChangeText={setNotes}
+            autoCapitalize="none"
+            autoCorrect={false}
+            placeholder="Anotações"
           />
           <Submit onPress={handleAddRepository}>
             <Icon name="add" size={22} color="#FFF" />
@@ -107,7 +147,7 @@ export default function App() {
           keyExtrator={item => String(item.id)}
           // eslint-disable-next-line prettier/prettier
           renderItem={({item}) => (
-            <Repository data={item} onRefresh={() => handleRefreshRepository(item)} />
+            <Repository data={item} />
           )}
         />
       </Container>
