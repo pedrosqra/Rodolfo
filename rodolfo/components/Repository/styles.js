@@ -8,17 +8,24 @@ export const Container = styled.View`
 `;
 
 export const Name = styled.Text`
+  font-size: 25px;
+  font-weight: bold;
+  color: #333;
+`;
+
+export const Texto = styled.Text`
   font-size: 18px;
   font-weight: bold;
   color: #333;
 `;
 
+
 export const Description = styled.Text.attrs({
   numberOfLines: 2,
 })`
-  color: #666;
+  color: #4169E1;
   margin-top: 5px;
-  line-height: 20px;
+  font-size: 25px;
 `;
 
 export const Stats = styled.View`
@@ -30,6 +37,7 @@ export const Stat = styled.View`
   flex-direction: row;
   align-items: center;
   margin-right: 15px;
+  justify-content: space-between;
 `;
 
 export const StatCount = styled.Text`
@@ -37,12 +45,12 @@ export const StatCount = styled.Text`
 `;
 
 export const Refresh = styled.TouchableOpacity`
-  margin-top: 20px;
+  margin-top: 10px;
   flex-direction: row;
 `;
 export const RefreshText = styled.Text`
-  font-size: 14px;
+  font-size: 15px;
   font-weight: bold;
-  color: #7149c1;
+  color: 	#4169E1;
   margin-left: 5px;
 `;

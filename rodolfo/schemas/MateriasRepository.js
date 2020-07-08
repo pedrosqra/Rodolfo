@@ -6,8 +6,6 @@ export default class Materias {
       id: 'int',
       name: 'string',
       goal: 'string',
-      grades: 'string',
-      notes: 'string',
     },
   };
 }
