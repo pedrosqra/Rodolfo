@@ -8,25 +8,21 @@
  */
 import React, { useState, useEffect } from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {StatusBar, Keyboard} from 'react-native';
+import {StatusBar, Keyboard, Text} from 'react-native';
 
 import getRealm from '../services/realm';
 import Repository from '../components/Repository/index';
 
-import {Container, List, Title, Input, Submit, Form} from './styles';
+import {TextButton, Container, List, Title, Input, Submit, Form, Texto} from './styles';
 
 export default function App() {
   const [id, setId] = useState(0);
   const [materia, setMateria] = useState('');
   const [goal, setGoal] = useState('');
-  const [grades, setGrades] = useState('');
-  const [notes, setNotes] = useState('');
   const info = {
     id,
     materia,
     goal,
-    grades,
-    notes,
   };
   const [error, setError] = useState(false);
   const [repositories, setRepositories] = useState([]);
@@ -52,8 +48,6 @@ export default function App() {
       id: info.id,
       name: info.materia,
       goal: info.goal,
-      grades: info.grades,
-      notes: info.notes,
     };
 
     const realm = await getRealm();
@@ -72,8 +66,6 @@ export default function App() {
       console.log(info.id);
       setMateria('');
       setGoal('');
-      setGrades('');
-      setNotes('');
       setError(false);
       Keyboard.dismiss();
     } catch (err) {
@@ -94,13 +86,16 @@ export default function App() {
       <Container>
         <Title>Rodolfo</Title>
 
+        <Texto>Cadastre uma nova matéria.</Texto>
+
+
         <Form>
           <Input
             value={materia}
             error={error}
             onChangeText={setMateria}
-            autoCapitalize="none"
-            autoCorrect={false}
+            autoCapitalize="characters"
+            autoCorrect={true}
             placeholder="Nome da matéria"
           />
         </Form>
@@ -113,33 +108,13 @@ export default function App() {
             autoCapitalize="none"
             autoCorrect={false}
             placeholder="Objetivo"
+            keyboardType = 'numeric'
           />
         </Form>
 
-        <Form>
-          <Input
-            value={grades}
-            error={error}
-            onChangeText={setGrades}
-            autoCapitalize="none"
-            autoCorrect={false}
-            placeholder="Notas"
-          />
-        </Form>
-
-        <Form>
-          <Input
-            value={notes}
-            error={error}
-            onChangeText={setNotes}
-            autoCapitalize="none"
-            autoCorrect={false}
-            placeholder="Anotações"
-          />
           <Submit onPress={handleAddRepository}>
-            <Icon name="add" size={22} color="#FFF" />
+            <Icon name="add" size={42} color="#FFF" />
           </Submit>
-        </Form>
 
         <List
           keyboardShouldPersistTaps="handled"
