@@ -154,6 +154,3 @@ export default function App() {
     </>
   );
 }
-
-//export default App;
-//const App: () => React$Node = () => {
