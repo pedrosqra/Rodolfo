@@ -1,11 +1,5 @@
 /* eslint-disable prettier/prettier */
-/**
- * Rodolfo
- * A class grade helper.
- *
- * @format
- * @flow strict-local
- */
+
 import React, { useState, useEffect } from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {StatusBar, Keyboard, Text} from 'react-native';
