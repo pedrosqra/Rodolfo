@@ -1,4 +1,4 @@
-import styled, { withTheme } from 'styled-components/native';
+import styled, {withTheme} from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
 import {getStatusBarHeight} from 'react-native-status-bar-height';
 
@@ -22,7 +22,7 @@ export const TextButton = styled.Text`
   font-size: 20px;
   color: white;
   font-weight: bold;
-  padding: 0 40px;
+  padding: 40px 40px;
 `;
 
 export const Texto = styled.Text`
@@ -51,13 +51,13 @@ export const Input = styled.TextInput.attrs({
 `;
 
 export const Submit = styled.TouchableOpacity`
-  background: '#6bd4c1';
+  background: #6bd4c1;
   margin-left: 20px;
   margin-right: 20px;
   justify-content: center;
   border-radius: 8px;
-  padding: 0 14px;
-  marginTop: 10;
+  padding: 25px 14px;
+  margin-top: 10px;
   height: 6px;
 `;
 

@@ -1,11 +1,11 @@
 export default class Materias {
   static schema = {
     name: 'Repository',
-    primaryKey: 'id',
+    primaryKey: 'materia',
     properties: {
-      id: 'int',
-      name: 'string',
+      materia: 'string',
       goal: 'string',
+      grades: 'string',
     },
   };
 }

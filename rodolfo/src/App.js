@@ -6,72 +6,46 @@
  * @format
  * @flow strict-local
  */
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {StatusBar, Keyboard, Text} from 'react-native';
+import {StatusBar} from 'react-native';
 
 import getRealm from '../services/realm';
-import Repository from '../components/Repository/index';
 
-import {TextButton, Container, List, Title, Input, Submit, Form, Texto} from './styles';
+import { Container, Title, Input, Submit, Form, Texto} from './styles';
 
 export default function App() {
-  const [id, setId] = useState(0);
   const [materia, setMateria] = useState('');
   const [goal, setGoal] = useState('');
-  const info = {
-    id,
-    materia,
-    goal,
-  };
+  const [grades, setGrades] = useState('');
   const [error, setError] = useState(false);
-  const [repositories, setRepositories] = useState([]);
 
-  function incrementId() {
-    setId(id + 1);
-  }
-
-  useEffect(() => {
-    async function loadRepositories() {
-      const realm = await getRealm();
-
-      const data = realm.objects('Repository').sorted('id', true);
-
-      setRepositories(data);
-    }
-
-    loadRepositories();
-  }, []);
-
-  async function saveRepository(info) {
+  async function saveRepository() {
     const data = {
-      id: info.id,
-      name: info.materia,
-      goal: info.goal,
+      materia: materia,
+      goal: goal,
+      grades: grades,
     };
 
     const realm = await getRealm();
 
     realm.write(() => {
-      realm.create('Repository', data, 'modified');
+      realm.create('Repository', data);
     });
-    incrementId();
     return data;
   }
 
   async function handleAddRepository() {
     try {
-      saveRepository(info);
+      saveRepository();
       console.log('deu certo');
-      console.log(info.id);
       setMateria('');
       setGoal('');
+      setGrades('');
       setError(false);
-      Keyboard.dismiss();
     } catch (err) {
       setError(true);
-      console.log(JSON.stringify(info));
-      console.log('fracasso');
+      console.log('não cadastrou');
     }
   }
 
@@ -102,29 +76,31 @@ export default function App() {
 
         <Form>
           <Input
+            value={grades}
+            error={error}
+            onChangeText={setGrades}
+            autoCapitalize="none"
+            autoCorrect={true}
+            placeholder="Notas"
+            keyboardType = "numeric"
+          />
+        </Form>
+
+        <Form>
+          <Input
             value={goal}
             error={error}
             onChangeText={setGoal}
             autoCapitalize="none"
             autoCorrect={false}
             placeholder="Objetivo"
-            keyboardType = 'numeric'
+            keyboardType = "numeric"
           />
         </Form>
 
           <Submit onPress={handleAddRepository}>
             <Icon name="add" size={42} color="#FFF" />
           </Submit>
-
-        <List
-          keyboardShouldPersistTaps="handled"
-          data={repositories}
-          keyExtrator={item => String(item.id)}
-          // eslint-disable-next-line prettier/prettier
-          renderItem={({item}) => (
-            <Repository data={item} />
-          )}
-        />
       </Container>
     </>
   );

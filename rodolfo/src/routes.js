@@ -1,9 +1,24 @@
-const express = require('express');
+import React from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import Adicionar from './App';
+import Home from '../src/pages/Listing/Listar';
 
-const materias = require('./pages/materias');
+const Tab = createBottomTabNavigator();
 
-const routes = express.Router();
+function MyTabs() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="Matérias" component={Home} />
+      <Tab.Screen name="Adicionar" component={Adicionar} />
+    </Tab.Navigator>
+  );
+}
 
-routes.get('/materias', index.index);
-
-module.exports = routes;
+export default function App() {
+  return (
+    <NavigationContainer>
+      <MyTabs />
+    </NavigationContainer>
+  );
+}

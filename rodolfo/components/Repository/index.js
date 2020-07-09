@@ -6,21 +6,16 @@ import {
   Description,
   Refresh,
   RefreshText,
-  Stats,
   Stat,
-  StatCount,
 } from './styles';
 
 const Repository = ({data, onRefresh}) => {
   return (
     <Container>
       <Stat>
-        <Name>{data.name}</Name>
+        <Name>{data.materia}</Name>
         <Description>{data.goal}</Description>
       </Stat>
-      
-
-
       <Refresh onPress={onRefresh}>
         <Icon name="refresh" color="#7159c1" size={16} />
         <RefreshText>NOVA NOTA</RefreshText>
