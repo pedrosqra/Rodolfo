@@ -6,6 +6,7 @@ export default class Materias {
       materia: 'string',
       goal: 'string',
       grades: 'string',
+      notes: 'string?[]',
     },
   };
 }

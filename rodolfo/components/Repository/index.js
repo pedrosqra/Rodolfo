@@ -8,6 +8,10 @@ import {
   RefreshText,
   ContainerTrue,
   StatsTrue,
+  GradeGoal,
+  NameTrue,
+  GradeAverage,
+  Notes,
 } from './styles';
 import Icon from 'react-native-vector-icons/FontAwesome';
 const Repository = ({data}) => {
@@ -28,7 +32,7 @@ const Repository = ({data}) => {
         </Stat>
 
         <Refresh onPress={setRenderingTrue}>
-          <Icon name="refresh" color="#7159c1" size={16} />
+          <Icon name="arrow-right" color="#7159c1" size={16} />
           <RefreshText>Abrir</RefreshText>
         </Refresh>
       </Container>
@@ -38,13 +42,16 @@ const Repository = ({data}) => {
     return (
       <ContainerTrue>
         <StatsTrue>
-          <Name>{data.materia}</Name>
-          <Description>{data.goal}</Description>
+          <NameTrue>{data.materia}</NameTrue>
+          <GradeGoal>Objetivo de média: {data.goal}</GradeGoal>
+          <GradeAverage>Média atual: 6</GradeAverage>
+          <Name>Suas Anotações:</Name>
+          <Notes>{data.notes}</Notes>
         </StatsTrue>
 
         <Refresh onPress={setRederingFalse}>
-          <Icon name="refresh" color="#7159c1" size={16} />
-          <RefreshText>Abrir</RefreshText>
+          <Icon name="arrow-left" color="#7159c1" size={16} />
+          <RefreshText>Voltar</RefreshText>
         </Refresh>
       </ContainerTrue>
     );

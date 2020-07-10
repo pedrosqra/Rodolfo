@@ -11,6 +11,7 @@ export default function App() {
   const [materia, setMateria] = useState('');
   const [goal, setGoal] = useState('');
   const [grades, setGrades] = useState('');
+  const [notes, setNotes] = useState('');
   const [error, setError] = useState(false);
 
   async function saveRepository() {
@@ -18,6 +19,7 @@ export default function App() {
       materia: materia,
       goal: goal,
       grades: grades,
+      notes: notes,
     };
 
     const realm = await getRealm();
@@ -32,6 +34,7 @@ export default function App() {
     try {
       saveRepository();
       console.log('deu certo');
+      alert('Matéria cadastrada com sucesso');
       setMateria('');
       setGoal('');
       setGrades('');
@@ -39,6 +42,7 @@ export default function App() {
     } catch (err) {
       setError(true);
       console.log('não cadastrou');
+      alert('Erro, tente novamente');
     }
   }
 
@@ -69,18 +73,6 @@ export default function App() {
 
         <Form>
           <Input
-            value={grades}
-            error={error}
-            onChangeText={setGrades}
-            autoCapitalize="none"
-            autoCorrect={true}
-            placeholder="Notas"
-            keyboardType = "numeric"
-          />
-        </Form>
-
-        <Form>
-          <Input
             value={goal}
             error={error}
             onChangeText={setGoal}
@@ -91,9 +83,36 @@ export default function App() {
           />
         </Form>
 
+        <Form>
+          <Input
+            value={grades}
+            error={error}
+            onChangeText={setGrades}
+            autoCapitalize="none"
+            autoCorrect={true}
+            placeholder="Anotações"
+            keyboardType = "numeric"
+          />
+        </Form>
+
+        <Form>
+          <Input
+            value={notes}
+            error={error}
+            onChangeText={setNotes}
+            autoCapitalize="none"
+            autoCorrect={true}
+            placeholder="Notas"
+            keyboardType = "numeric"
+          />
+        </Form>
+
+
           <Submit onPress={handleAddRepository}>
             <Icon name="add" size={42} color="#FFF" />
           </Submit>
+
+          
       </Container>
     </>
   );
