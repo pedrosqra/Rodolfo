@@ -67,3 +67,8 @@ export const List = styled.FlatList.attrs({
 })`
   margin-top: 20px;
 `;
+
+export const Refresh = styled.TouchableOpacity`
+  margin-top: 20px;
+  flex-direction: row;
+`;

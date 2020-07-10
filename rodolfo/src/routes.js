@@ -2,7 +2,7 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Adicionar from './pages/AdicionarMaterias/addSubject';
-import Home from './pages/ListingMaterias/listSubjects';
+import Home from '../src/pages/ListingMaterias/listSubjects';
 
 const Tab = createBottomTabNavigator();
 
