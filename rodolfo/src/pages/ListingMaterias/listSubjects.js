@@ -42,12 +42,6 @@ export default function App() {
             <Repository data={item} />
           )}
         />
-        <Submit onPress={() => {}}>
-            <Icon name="add" size={42} color="#FFF" />
-        </Submit>
-
-        
-
       </Container>
     </>
   );
