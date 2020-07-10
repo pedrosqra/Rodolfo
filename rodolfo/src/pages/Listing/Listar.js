@@ -20,7 +20,7 @@ export default function App() {
     }
 
     loadRepositories();
-  }, [repositories]);
+  }, []);
 
   return (
     <>

@@ -9,7 +9,11 @@ const Tab = createBottomTabNavigator();
 function MyTabs() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Matérias" component={Home} />
+      <Tab.Screen
+        options={{unmountOnBlur: true}}
+        name="Matérias"
+        component={Home}
+      />
       <Tab.Screen name="Adicionar" component={Adicionar} />
     </Tab.Navigator>
   );
