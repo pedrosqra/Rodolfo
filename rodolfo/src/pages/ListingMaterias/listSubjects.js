@@ -6,7 +6,7 @@ import {StatusBar} from 'react-native';
 import getRealm from '../../../services/realm';
 import Repository from '../../../components/Repository/index';
 
-import {Container, List, Title} from '../../styles';
+import {Container, List, Title} from './styles';
 
 export default function App() {
   const [repositories, setRepositories] = useState([]);

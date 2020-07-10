@@ -1,4 +1,4 @@
-import styled, {withTheme} from 'styled-components/native';
+import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
 import {getStatusBarHeight} from 'react-native-status-bar-height';
 

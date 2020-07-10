@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {StatusBar} from 'react-native';
 
-import getRealm from '../services/realm';
+import getRealm from '../../../services/realm';
 
 import { Container, Title, Input, Submit, Form, Texto} from './styles';
 
