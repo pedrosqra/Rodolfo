@@ -2,14 +2,16 @@
 
 import React, { useState, useEffect } from 'react';
 import {StatusBar} from 'react-native';
-
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import getRealm from '../../../services/realm';
 import Repository from '../../../components/Repository/index';
 
-import {Container, List, Title} from './styles';
+import {Container, List, Title, Submit} from './styles';
 
 export default function App() {
   const [repositories, setRepositories] = useState([]);
+
+
   useEffect(() => {
     async function loadRepositories() {
 
@@ -40,6 +42,11 @@ export default function App() {
             <Repository data={item} />
           )}
         />
+        <Submit onPress={() => {}}>
+            <Icon name="add" size={42} color="#FFF" />
+        </Submit>
+
+        
 
       </Container>
     </>

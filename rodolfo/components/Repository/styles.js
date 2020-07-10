@@ -60,3 +60,17 @@ export const List = styled.FlatList.attrs({
 })`
   margin-top: 20px;
 `;
+
+export const StatsTrue = styled.View`
+  flex-direction: row;
+  align-items: center;
+  margin-right: 15px;
+  justify-content: space-between;
+`;
+export const ContainerTrue = styled.View`
+  padding: 100px;
+  background: #fff;
+  margin-bottom: 15px;
+  height: 100%;
+  width: 100%;
+`;
