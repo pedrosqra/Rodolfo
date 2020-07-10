@@ -14,7 +14,7 @@ export default function App() {
     async function loadRepositories() {
 
       const realm = await getRealm();
-      const data = realm.objects('Repository');
+      const data = realm.objects('Repository').sorted('goal', false);
 
       setRepositories(data);
     }
