@@ -20,12 +20,15 @@ import {
 } from './styles';
 import Plus from 'react-native-vector-icons/MaterialIcons';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import realm from '../../services/realm';
+
 const Repository = ({data}) => {
   const [render, setRender] = useState(false);
   const [stringNotes, setString] = useState('');
   const [grade, setGrade] = useState(0);
   const [error, setError] = useState(false);
   const name = data.materia;
+
 
   async function handleAddRepository() {
     try {
@@ -45,20 +48,26 @@ const Repository = ({data}) => {
   async function saveRepository() {
     const realm = await getRealm();
 
+    
+    
     realm.write(() => {
-      realm.create(
-        'Repository',
-        {
-          materia: name,
-          goal: data.goal,
-          notes: [stringNotes],
-          grades: [parseFloat(grade, 10)],
-        },
-        true,
-      );
-    });
+      let materias = realm.objects('Repository');
+        for (let p of materias) {
+          if (p.materia == `${name}`){
+            `${p.grades.push(parseFloat(grade))}`;} 
+        }
+    })
+
+
+    
+    console.log(grade);
+
     return data;
+
+
   }
+
+
   function setRenderingTrue() {
     setRender(true);
   }
@@ -87,9 +96,10 @@ const Repository = ({data}) => {
         <StatsTrue>
           <NameTrue>{data.materia}</NameTrue>
           <GradeGoal>Objetivo de média: {data.goal}</GradeGoal>
-          <GradeAverage>Média atual: 6</GradeAverage>
+          <GradeAverage>Média atual: 10</GradeAverage>
           <Name>Suas Anotações:</Name>
-          <Notes>{data.notes}</Notes>
+          
+          <Notes>{data.grades}</Notes>
         </StatsTrue>
 
         <Form>

@@ -10,15 +10,15 @@ import { Container, Title, Input, Submit, Form, Texto} from './styles';
 export default function App() {
   const [materia, setMateria] = useState('');
   const [goal, setGoal] = useState('');
-  const [grades, setGrades] = useState([]);
-  const [stringnotes, setStringNotes] = useState('');
   const [error, setError] = useState(false);
+
+
+
+
   async function saveRepository() {
     const data = {
       materia: materia,
       goal: goal,
-      grades: grades,
-      notes: stringnotes,
     };
 
     const realm = await getRealm();
@@ -35,8 +35,6 @@ export default function App() {
       console.log('deu certo');
       alert('Matéria cadastrada com sucesso');
       setMateria('');
-      setGoal('');
-      setGrades('');
       setError(false);
     } catch (err) {
       setError(true);
@@ -78,29 +76,6 @@ export default function App() {
             autoCapitalize="none"
             autoCorrect={false}
             placeholder="Objetivo"
-            keyboardType = "numeric"
-          />
-        </Form>
-
-        <Form>
-          <Input
-            value={`${stringnotes}`}
-            error={error}
-            onChangeText={setStringNotes}
-            autoCapitalize="none"
-            autoCorrect={true}
-            placeholder="Anotações"
-          />
-        </Form>
-
-        <Form>
-          <Input
-            value={grades}
-            error={error}
-            onChangeText={setGrades}
-            autoCapitalize="none"
-            autoCorrect={true}
-            placeholder="Notas"
             keyboardType = "numeric"
           />
         </Form>

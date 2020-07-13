@@ -5,7 +5,7 @@ export default class Materias {
     properties: {
       materia: 'string',
       goal: 'string',
-      grades: 'string',
+      grades: 'float?[]',
       notes: 'string?[]',
     },
   };
