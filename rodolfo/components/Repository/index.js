@@ -29,7 +29,7 @@ const Repository = ({data}) => {
   const [error, setError] = useState(false);
   const [overviewrender, setOverview] = useState(false);
   const name = data.materia;
-
+  //Realm database
   async function handleAddRepository() {
     try {
       saveRepository();
@@ -41,7 +41,7 @@ const Repository = ({data}) => {
       alert('Erro, tente novamente');
     }
   }
-
+  //Realm database
   async function saveRepository() {
     const realm = await getRealm();
 
@@ -49,15 +49,20 @@ const Repository = ({data}) => {
     let gradesdb = notasdadb.filtered(`materia BEGINSWITH "${name}"`);
     let notesdb = notasdadb.filtered(`materia BEGINSWITH "${name}"`);
     realm.write(() => {
-      for (let p of notesdb) {
-        `  ${p.notes.push(String(stringNotes))}`;
+      if (stringNotes !== '') {
+        for (let p of notesdb) {
+          `  ${p.notes.push(String(stringNotes))}`;
+        }
       }
-      for (let p of gradesdb) {
-        `  ${p.grades.push(parseFloat(grade))}`;
+      if (grade !== 0) {
+        for (let p of gradesdb) {
+          `  ${p.grades.push(parseFloat(grade))}`;
+        }
       }
     });
     return data;
   }
+  //Renders
   function setRenderingTrue() {
     setRender(true);
   }
@@ -73,6 +78,7 @@ const Repository = ({data}) => {
   function setOverviewRederingFalse() {
     setOverview(false);
   }
+  //Main page
   if (render === false) {
     return (
       <Container>
@@ -88,7 +94,9 @@ const Repository = ({data}) => {
       </Container>
     );
   }
+  //Overview cards
   if (render === true) {
+    //Main overview card
     if (overviewrender === false) {
       return (
         <ContainerTrue>
@@ -111,6 +119,7 @@ const Repository = ({data}) => {
         </ContainerTrue>
       );
     }
+    //Card to add data
     if (overviewrender === true) {
       return (
         <ContainerTrue>
