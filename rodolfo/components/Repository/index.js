@@ -47,23 +47,14 @@ const Repository = ({data}) => {
 
     let notasdadb = realm.objects('Repository');
     let gradesdb = notasdadb.filtered(`materia BEGINSWITH "${name}"`);
-    for (let p of gradesdb) {
-      setGrade(grade.concat`  ${p.grades}`);
-    }
     let notesdb = notasdadb.filtered(`materia BEGINSWITH "${name}"`);
-    for (let p of notesdb) {
-      setString(grade.concat(`  ${p.notes}`));
-    }
     realm.write(() => {
-      realm.create(
-        'Repository',
-        {
-          materia: name,
-          notes: [String(stringNotes)],
-          grades: [parseFloat(grade, 10)],
-        },
-        true,
-      );
+      for (let p of notesdb) {
+        `  ${p.notes.push(String(stringNotes))}`;
+      }
+      for (let p of gradesdb) {
+        `  ${p.grades.push(parseFloat(grade))}`;
+      }
     });
     return data;
   }
