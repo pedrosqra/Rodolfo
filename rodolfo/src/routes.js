@@ -8,24 +8,28 @@ const Tab = createBottomTabNavigator();
 
 function MyTabs() {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      screenOptions={({route}) => ({
+        tabBarIcon: ({focused, color, size}) => {
+          let iconName;
+
+          if (route.name === 'Matérias') {
+            iconName = 'book';
+          } else if (route.name === 'Adicionar') {
+            iconName = 'add-box';
+          }
+
+          return <Icon name={iconName} size={28} color={color} />;
+        },
+      })}
+      tabBarOptions={{
+        keyboardHidesTabBar: true,
+        activeTintColor: '#4169e1',
+        inactiveTintColor: '#333',
+      }}>
+      <Tab.Screen name="Matérias" component={Home} />
       <Tab.Screen
-        name="Matérias"
-        component={Home}
         options={{
-          tabBarLabel: 'Matérias',
-          tabBarIcon: ({color, size}) => (
-            <Icon name="book" color="#4169E1" size={28} />
-          ),
-          unmountOnBlur: true,
-        }}
-      />
-      <Tab.Screen
-        options={{
-          tabBarLabel: 'Adicionar',
-          tabBarIcon: ({color, size}) => (
-            <Icon name="add-box" color="#4169E1" size={32} />
-          ),
           unmountOnBlur: true,
         }}
         name="Adicionar"
