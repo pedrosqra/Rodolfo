@@ -3,18 +3,34 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Adicionar from './pages/AdicionarMaterias/addSubject';
 import Home from '../src/pages/ListingMaterias/listSubjects';
-
+import Icon from 'react-native-vector-icons/MaterialIcons';
 const Tab = createBottomTabNavigator();
 
 function MyTabs() {
   return (
     <Tab.Navigator>
       <Tab.Screen
-        options={{unmountOnBlur: true}}
         name="Matérias"
         component={Home}
+        options={{
+          tabBarLabel: 'Matérias',
+          tabBarIcon: ({color, size}) => (
+            <Icon name="book" color="#4169E1" size={28} />
+          ),
+          unmountOnBlur: true,
+        }}
       />
-      <Tab.Screen name="Adicionar" component={Adicionar} />
+      <Tab.Screen
+        options={{
+          tabBarLabel: 'Adicionar',
+          tabBarIcon: ({color, size}) => (
+            <Icon name="add" color="#4169E1" size={40} />
+          ),
+          unmountOnBlur: true,
+        }}
+        name="Adicionar"
+        component={Adicionar}
+      />
     </Tab.Navigator>
   );
 }
