@@ -140,7 +140,6 @@ export const Input = styled.TextInput.attrs({
   color: #333;
   background: white;
   border: 2px solid ${props => (props.error ? '#FF7272' : '#6bd4c1')};
->>>>>>> 6c7a3805a17261eeb658e1654d35c2fb981ac540
 `;
 
 export const Submit = styled.TouchableOpacity`

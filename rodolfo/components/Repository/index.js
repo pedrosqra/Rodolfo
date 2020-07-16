@@ -48,21 +48,27 @@ const Repository = ({data}) => {
   //Realm database
   async function saveRepository() {
     const realm = await getRealm();
-    
-    
+
+    let notasdadb = realm.objects('Repository');
+    let gradesdb = notasdadb.filtered(`materia BEGINSWITH "${name}"`);
+    let notesdb = notasdadb.filtered(`materia BEGINSWITH "${name}"`);
     realm.write(() => {
-      let materias = realm.objects('Repository');
-        for (let p of materias) {
-          if (p.materia == `${name}`){
-            `${p.grades.push(parseFloat(grade))}`;}  
-            console.log(p.grades.avg('grades'));
+      if (stringNotes !== '') {
+        for (let p of notesdb) {
+          `  ${p.notes.push("\n" + String(stringNotes))}`;
         }
-    })
-
-    console.log(grade);
-
+      }
+      if (grade !== 0) {
+        for (let p of gradesdb) {
+          `  ${p.grades.push(parseFloat(grade))}`;
+        }
+      }
+    });
     return data;
+  }
 
+  function string(){
+    
   }
 
 
@@ -108,6 +114,7 @@ const Repository = ({data}) => {
             <NameTrue>{data.materia}</NameTrue>
             <GradeGoal>Objetivo de média: {data.goal}</GradeGoal>
             <GradeAverage>Média atual: 6</GradeAverage>
+            <GradeAverage>Histórico de notas: {data.grades}</GradeAverage>
             <Name>Suas Anotações:</Name>
             <Notes>{data.notes}</Notes>
           </StatsTrue>
