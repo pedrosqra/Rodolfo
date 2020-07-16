@@ -28,6 +28,8 @@ const Repository = ({data}) => {
   const [grade, setGrade] = useState(0);
   const [error, setError] = useState(false);
   const name = data.materia;
+  const [strin, setStrin] = useState('');
+  const [average, setAverage] = useState(0);
 
 
   async function handleAddRepository() {
@@ -36,8 +38,6 @@ const Repository = ({data}) => {
       console.log('deu certo');
       alert('Matéria cadastrada com sucesso');
       setError(false);
-      console.log(grade);
-      console.log(stringNotes);
     } catch (err) {
       setError(true);
       console.log('não cadastrou');
@@ -54,7 +54,8 @@ const Repository = ({data}) => {
       let materias = realm.objects('Repository');
         for (let p of materias) {
           if (p.materia == `${name}`){
-            `${p.grades.push(parseFloat(grade))}`;} 
+            `${p.grades.push(parseFloat(grade))}`;}  
+            console.log(p.grades.avg('grades'));
         }
     })
 
@@ -96,12 +97,11 @@ const Repository = ({data}) => {
         <StatsTrue>
           <NameTrue>{data.materia}</NameTrue>
           <GradeGoal>Objetivo de média: {data.goal}</GradeGoal>
-          <GradeAverage>Média atual: 10</GradeAverage>
+          <GradeAverage>Méldia atual: {average}</GradeAverage>
           <Name>Suas Anotações:</Name>
-          
           <Notes>{data.grades}</Notes>
-        </StatsTrue>
 
+        </StatsTrue>
         <Form>
           <Input
             value={stringNotes}
