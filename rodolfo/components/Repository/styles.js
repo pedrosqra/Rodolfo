@@ -152,6 +152,7 @@ export const Submit = styled.TouchableOpacity`
   margin-top: 10px;
   height: 6px;
 `;
+
 33;
 
 export const InserirDados = styled.Text`
@@ -162,3 +163,4 @@ export const InserirDados = styled.Text`
   font-weight: bold;
   color: #333b;
 `;
+

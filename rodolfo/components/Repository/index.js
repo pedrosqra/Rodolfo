@@ -25,6 +25,7 @@ import {
 import Plus from 'react-native-vector-icons/MaterialIcons';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+
 const Repository = ({data}) => {
   const [render, setRender] = useState(false);
   const [stringNotes, setString] = useState('');
@@ -32,7 +33,8 @@ const Repository = ({data}) => {
   const [error, setError] = useState(false);
   const [overviewrender, setOverview] = useState(false);
   const name = data.materia;
-  //Realm database
+  const [media, setMedia] = useState(0);
+
   async function handleAddRepository() {
     try {
       saveRepository();
@@ -44,28 +46,59 @@ const Repository = ({data}) => {
       alert('Erro, tente novamente');
     }
   }
+
+
+
+  async function avgArray(){
+    const realm = await getRealm();
+    let notasdadb = realm.objects('Repository');
+    let gradesdb = notasdadb.filtered(`materia BEGINSWITH "${name}"`);
+    var sum = 0;
+    var size = 0;
+
+    for (let p of gradesdb) {
+      size += parseFloat(p.grades.length);
+      
+      for (let num of p.grades){
+        sum += num;
+      }
+
+  };
+
+    setMedia(sum/size);
+  }
+
+
   //Realm database
   async function saveRepository() {
     const realm = await getRealm();
-
     let notasdadb = realm.objects('Repository');
     let gradesdb = notasdadb.filtered(`materia BEGINSWITH "${name}"`);
     let notesdb = notasdadb.filtered(`materia BEGINSWITH "${name}"`);
     realm.write(() => {
       if (stringNotes !== '') {
         for (let p of notesdb) {
-          `  ${p.notes.push(String(stringNotes))}`;
+          if (p.notes.length != 0){
+          `  ${p.notes.push("\n" + String(stringNotes))}`;
+          } else {
+            `  ${p.notes.push(String(stringNotes))}`;
+          }
         }
       }
       if (grade !== 0) {
         for (let p of gradesdb) {
           `  ${p.grades.push(parseFloat(grade))}`;
-        }
+          avgArray();
+          }   
       }
     });
+    
     return data;
   }
-  //Renders
+
+
+
+
   function setRenderingTrue() {
     setRender(true);
   }
@@ -99,6 +132,7 @@ const Repository = ({data}) => {
   }
   //Overview cards
   if (render === true) {
+
     //Main overview card
     if (overviewrender === false) {
       return (
@@ -106,7 +140,8 @@ const Repository = ({data}) => {
           <StatsTrue>
             <NameTrue>{data.materia}</NameTrue>
             <GradeGoal>Objetivo de média: {data.goal}</GradeGoal>
-            <GradeAverage>Média atual: 6</GradeAverage>
+            <GradeAverage>Média atual: {media}</GradeAverage>
+            <GradeAverage>Histórico de notas: {data.grades}</GradeAverage>
             <Name>Suas Anotações:</Name>
             <Notes>{data.notes}</Notes>
           </StatsTrue>
@@ -116,6 +151,7 @@ const Repository = ({data}) => {
               <Icon name="arrow-left" color="#7159c1" size={16} />
               <RefreshText>Voltar</RefreshText>
             </Voltar>
+
 
             <Dados onPress={setOverviewRenderingTrue}>
               <Icon name="arrow-right" color="#7159c1" size={16} />
