@@ -24,7 +24,7 @@ function MyTabs() {
         options={{
           tabBarLabel: 'Adicionar',
           tabBarIcon: ({color, size}) => (
-            <Icon name="add" color="#4169E1" size={40} />
+            <Icon name="add-box" color="#4169E1" size={32} />
           ),
           unmountOnBlur: true,
         }}
