@@ -33,6 +33,7 @@ const Repository = ({data}) => {
   const [error, setError] = useState(false);
   const [overviewrender, setOverview] = useState(false);
   const name = data.materia;
+  const [media, setMedia] = useState(0);
 
   async function handleAddRepository() {
     try {
@@ -45,10 +46,32 @@ const Repository = ({data}) => {
       alert('Erro, tente novamente');
     }
   }
+
+
+
+  async function avgArray(){
+    const realm = await getRealm();
+    let notasdadb = realm.objects('Repository');
+    let gradesdb = notasdadb.filtered(`materia BEGINSWITH "${name}"`);
+    var sum = 0;
+    var size = 0;
+
+    for (let p of gradesdb) {
+      size += parseFloat(p.grades.length);
+      
+      for (let num of p.grades){
+        sum += num;
+      }
+
+  };
+
+    setMedia(sum/size);
+  }
+
+
   //Realm database
   async function saveRepository() {
     const realm = await getRealm();
-
     let notasdadb = realm.objects('Repository');
     let gradesdb = notasdadb.filtered(`materia BEGINSWITH "${name}"`);
     let notesdb = notasdadb.filtered(`materia BEGINSWITH "${name}"`);
@@ -65,15 +88,15 @@ const Repository = ({data}) => {
       if (grade !== 0) {
         for (let p of gradesdb) {
           `  ${p.grades.push(parseFloat(grade))}`;
-        }
+          avgArray();
+          }   
       }
     });
+    
     return data;
   }
 
-  function string(){
-    
-  }
+
 
 
   function setRenderingTrue() {
@@ -117,7 +140,7 @@ const Repository = ({data}) => {
           <StatsTrue>
             <NameTrue>{data.materia}</NameTrue>
             <GradeGoal>Objetivo de média: {data.goal}</GradeGoal>
-            <GradeAverage>Média atual: 6</GradeAverage>
+            <GradeAverage>Média atual: {media}</GradeAverage>
             <GradeAverage>Histórico de notas: {data.grades}</GradeAverage>
             <Name>Suas Anotações:</Name>
             <Notes>{data.notes}</Notes>
