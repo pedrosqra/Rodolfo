@@ -17,26 +17,27 @@ import {
   Form,
   Input,
   Submit,
+  InserirDados,
+  Dados,
+  Voltar,
+  BotoesOverview,
 } from './styles';
 import Plus from 'react-native-vector-icons/MaterialIcons';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import realm from '../../services/realm';
+
 
 const Repository = ({data}) => {
   const [render, setRender] = useState(false);
   const [stringNotes, setString] = useState('');
   const [grade, setGrade] = useState(0);
   const [error, setError] = useState(false);
+  const [overviewrender, setOverview] = useState(false);
   const name = data.materia;
-  const [strin, setStrin] = useState('');
-  const [average, setAverage] = useState(0);
-
 
   async function handleAddRepository() {
     try {
       saveRepository();
       console.log('deu certo');
-      alert('Matéria cadastrada com sucesso');
       setError(false);
     } catch (err) {
       setError(true);
@@ -44,10 +45,9 @@ const Repository = ({data}) => {
       alert('Erro, tente novamente');
     }
   }
-
+  //Realm database
   async function saveRepository() {
     const realm = await getRealm();
-
     
     
     realm.write(() => {
@@ -59,12 +59,9 @@ const Repository = ({data}) => {
         }
     })
 
-
-    
     console.log(grade);
 
     return data;
-
 
   }
 
@@ -76,6 +73,15 @@ const Repository = ({data}) => {
   function setRederingFalse() {
     setRender(false);
   }
+
+  function setOverviewRenderingTrue() {
+    setOverview(true);
+  }
+
+  function setOverviewRederingFalse() {
+    setOverview(false);
+  }
+  //Main page
   if (render === false) {
     return (
       <Container>
@@ -91,52 +97,76 @@ const Repository = ({data}) => {
       </Container>
     );
   }
+  //Overview cards
   if (render === true) {
-    return (
-      <ContainerTrue>
-        <StatsTrue>
-          <NameTrue>{data.materia}</NameTrue>
-          <GradeGoal>Objetivo de média: {data.goal}</GradeGoal>
-          <GradeAverage>Méldia atual: {average}</GradeAverage>
-          <Name>Suas Anotações:</Name>
-          <Notes>{data.grades}</Notes>
 
-        </StatsTrue>
-        <Form>
-          <Input
-            value={stringNotes}
-            error={error}
-            onChangeText={setString}
-            autoCapitalize="none"
-            autoCorrect={false}
-            placeholder="Anotações"
-            keyboardType="default"
-          />
-        </Form>
+    //Main overview card
+    if (overviewrender === false) {
+      return (
+        <ContainerTrue>
+          <StatsTrue>
+            <NameTrue>{data.materia}</NameTrue>
+            <GradeGoal>Objetivo de média: {data.goal}</GradeGoal>
+            <GradeAverage>Média atual: 6</GradeAverage>
+            <Name>Suas Anotações:</Name>
+            <Notes>{data.notes}</Notes>
+          </StatsTrue>
 
-        <Form>
-          <Input
-            value={grade}
-            error={error}
-            onChangeText={setGrade}
-            autoCapitalize="none"
-            autoCorrect={false}
-            placeholder="Nova nota"
-            keyboardType="default"
-          />
-        </Form>
+          <BotoesOverview>
+            <Voltar onPress={setRederingFalse}>
+              <Icon name="arrow-left" color="#7159c1" size={16} />
+              <RefreshText>Voltar</RefreshText>
+            </Voltar>
 
-        <Submit onPress={handleAddRepository}>
-          <Plus name="add" size={42} color="#FFF" />
-        </Submit>
 
-        <Refresh onPress={setRederingFalse}>
-          <Icon name="arrow-left" color="#7159c1" size={16} />
-          <RefreshText>Voltar</RefreshText>
-        </Refresh>
-      </ContainerTrue>
-    );
+            <Dados onPress={setOverviewRenderingTrue}>
+              <Icon name="arrow-right" color="#7159c1" size={16} />
+              <RefreshText>Inserir Dados</RefreshText>
+            </Dados>
+          </BotoesOverview>
+        </ContainerTrue>
+      );
+    }
+    //Card for adding data
+    if (overviewrender === true) {
+      return (
+        <ContainerTrue>
+          <InserirDados>Inserir Anotações</InserirDados>
+          <Form>
+            <Input
+              value={stringNotes}
+              error={error}
+              onChangeText={setString}
+              autoCapitalize="none"
+              autoCorrect={false}
+              placeholder="Anotações"
+              keyboardType="default"
+            />
+          </Form>
+          <InserirDados>Inserir Notas</InserirDados>
+          <Form>
+            <Input
+              value={grade}
+              error={error}
+              onChangeText={setGrade}
+              autoCapitalize="none"
+              autoCorrect={false}
+              placeholder="Nova nota"
+              keyboardType="numeric"
+            />
+          </Form>
+
+          <Submit onPress={handleAddRepository}>
+            <Plus name="add" size={42} color="#FFF" />
+          </Submit>
+
+          <Voltar onPress={setOverviewRederingFalse}>
+            <Icon name="arrow-left" color="#7159c1" size={16} />
+            <RefreshText>Voltar</RefreshText>
+          </Voltar>
+        </ContainerTrue>
+      );
+    }
   }
 };
-
 export default Repository;

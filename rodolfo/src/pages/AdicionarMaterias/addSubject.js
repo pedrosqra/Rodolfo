@@ -35,6 +35,7 @@ export default function App() {
       console.log('deu certo');
       alert('Matéria cadastrada com sucesso');
       setMateria('');
+      setGoal('');
       setError(false);
     } catch (err) {
       setError(true);
@@ -79,9 +80,7 @@ export default function App() {
             keyboardType = "numeric"
           />
         </Form>
-
-
-          <Submit onPress={handleAddRepository}>
+        <Submit onPress={handleAddRepository}>
             <Icon name="add" size={42} color="#FFF" />
           </Submit>
 

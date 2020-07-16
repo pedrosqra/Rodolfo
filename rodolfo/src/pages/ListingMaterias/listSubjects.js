@@ -2,12 +2,12 @@
 
 import React, { useState, useEffect } from 'react';
 import {StatusBar} from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import getRealm from '../../../services/realm';
 
 import Repository from '../../../components/Repository/index';
-import {Container, List, Title, Submit} from './styles';
+import {Container, List, Title} from './styles';
+
 export default function App() {
   const [repositories, setRepositories] = useState([]);
 

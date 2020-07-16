@@ -7,6 +7,30 @@ export const Container = styled.View`
   margin-bottom: 15px;
 `;
 
+export const BotoesOverview = styled.View`
+  background: #fff;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+export const Dados = styled.TouchableOpacity`
+  margin-top: 20px;
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const Voltar = styled.TouchableOpacity`
+  margin-top: 20px;
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const Refresh = styled.TouchableOpacity`
+  margin-top: 20px;
+  flex-direction: row;
+  align-items: center;
+`;
+
 export const Name = styled.Text`
   font-size: 25px;
   font-weight: bold;
@@ -43,10 +67,6 @@ export const StatCount = styled.Text`
   margin-left: 6px;
 `;
 
-export const Refresh = styled.TouchableOpacity`
-  margin-top: 10px;
-  flex-direction: row;
-`;
 export const RefreshText = styled.Text`
   font-size: 15px;
   font-weight: bold;
@@ -104,7 +124,6 @@ export const Notes = styled.Text`
   font-size: 20px;
 `;
 
-
 export const Form = styled.View`
   flex-direction: row;
   margin-top: 10px;
@@ -120,7 +139,8 @@ export const Input = styled.TextInput.attrs({
   font-size: 16px;
   color: #333;
   background: white;
-  border: 2px solid ${props => (props.error ? '#FF7272' : '#FFF')};
+  border: 2px solid ${props => (props.error ? '#FF7272' : '#6bd4c1')};
+>>>>>>> 6c7a3805a17261eeb658e1654d35c2fb981ac540
 `;
 
 export const Submit = styled.TouchableOpacity`
@@ -133,3 +153,15 @@ export const Submit = styled.TouchableOpacity`
   margin-top: 10px;
   height: 6px;
 `;
+
+33;
+
+export const InserirDados = styled.Text`
+  margin-top: 20px
+  margin-bottom: 10px
+  flex-direction: row;
+  font-size: 25px;
+  font-weight: bold;
+  color: #333b;
+`;
+
