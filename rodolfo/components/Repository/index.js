@@ -18,6 +18,9 @@ import {
   Input,
   Submit,
   InserirDados,
+  Dados,
+  Voltar,
+  BotoesOverview,
 } from './styles';
 import Plus from 'react-native-vector-icons/MaterialIcons';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -107,19 +110,22 @@ const Repository = ({data}) => {
             <Name>Suas Anotações:</Name>
             <Notes>{data.notes}</Notes>
           </StatsTrue>
-          <Refresh onPress={setOverviewRenderingTrue}>
-            <Icon name="arrow-right" color="#7159c1" size={16} />
-            <RefreshText>Inserir Dados</RefreshText>
-          </Refresh>
 
-          <Refresh onPress={setRederingFalse}>
-            <Icon name="arrow-left" color="#7159c1" size={16} />
-            <RefreshText>Voltar</RefreshText>
-          </Refresh>
+          <BotoesOverview>
+            <Voltar onPress={setRederingFalse}>
+              <Icon name="arrow-left" color="#7159c1" size={16} />
+              <RefreshText>Voltar</RefreshText>
+            </Voltar>
+
+            <Dados onPress={setOverviewRenderingTrue}>
+              <Icon name="arrow-right" color="#7159c1" size={16} />
+              <RefreshText>Inserir Dados</RefreshText>
+            </Dados>
+          </BotoesOverview>
         </ContainerTrue>
       );
     }
-    //Card to add data
+    //Card for adding data
     if (overviewrender === true) {
       return (
         <ContainerTrue>
@@ -152,10 +158,10 @@ const Repository = ({data}) => {
             <Plus name="add" size={42} color="#FFF" />
           </Submit>
 
-          <Refresh onPress={setOverviewRederingFalse}>
+          <Voltar onPress={setOverviewRederingFalse}>
             <Icon name="arrow-left" color="#7159c1" size={16} />
             <RefreshText>Voltar</RefreshText>
-          </Refresh>
+          </Voltar>
         </ContainerTrue>
       );
     }

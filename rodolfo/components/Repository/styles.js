@@ -7,6 +7,30 @@ export const Container = styled.View`
   margin-bottom: 15px;
 `;
 
+export const BotoesOverview = styled.View`
+  background: #fff;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+export const Dados = styled.TouchableOpacity`
+  margin-top: 20px;
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const Voltar = styled.TouchableOpacity`
+  margin-top: 20px;
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const Refresh = styled.TouchableOpacity`
+  margin-top: 20px;
+  flex-direction: row;
+  align-items: center;
+`;
+
 export const Name = styled.Text`
   font-size: 25px;
   font-weight: bold;
@@ -43,10 +67,6 @@ export const StatCount = styled.Text`
   margin-left: 6px;
 `;
 
-export const Refresh = styled.TouchableOpacity`
-  margin-top: 10px;
-  flex-direction: row;
-`;
 export const RefreshText = styled.Text`
   font-size: 15px;
   font-weight: bold;
