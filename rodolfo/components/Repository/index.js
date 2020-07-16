@@ -55,7 +55,11 @@ const Repository = ({data}) => {
     realm.write(() => {
       if (stringNotes !== '') {
         for (let p of notesdb) {
+          if (p.notes.length != 0){
           `  ${p.notes.push("\n" + String(stringNotes))}`;
+          } else {
+            `  ${p.notes.push(String(stringNotes))}`;
+          }
         }
       }
       if (grade !== 0) {
