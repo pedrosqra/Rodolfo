@@ -95,7 +95,7 @@ const Repository = ({data}) => {
 
     return data;
   }
-
+  avgArray();
   function expandSubjectCard() {
     setRender(true);
   }
