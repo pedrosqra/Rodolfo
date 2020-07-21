@@ -7,9 +7,9 @@ Rodolfo was created to be an offline application that helps you keep track of yo
 a main grade that is your average goal for that subject. Rodolfo will show you your current status in achieving that goal.
 
 ### Made with
- * React Native
- * React Navigation
- * Realm
+ * [React Native](https://reactnative.dev/)
+ * [React Navigation](https://reactnavigation.org/docs/bottom-tab-navigator/)
+ * [Realm](https://realm.io/docs/javascript/latest)
  
 
 
