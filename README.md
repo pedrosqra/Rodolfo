@@ -11,8 +11,6 @@ a main grade that is your average goal for that subject. Rodolfo will show you y
  * React Navigation
  * Realm
  
-## License
-MIT Licence
 
 
 **Feel free to contribute to this project! :)**
