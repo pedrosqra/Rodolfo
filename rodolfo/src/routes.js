@@ -1,8 +1,8 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import Adicionar from './pages/AdicionarMaterias/addSubject';
-import Home from '../src/pages/ListingMaterias/listSubjects';
+import Adicionar from './pages/AdicionarMaterias/index';
+import Home from './pages/ListingMaterias/index';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 const Tab = createBottomTabNavigator();
 
@@ -27,7 +27,13 @@ function MyTabs() {
         activeTintColor: '#4169e1',
         inactiveTintColor: '#333',
       }}>
-      <Tab.Screen name="Matérias" component={Home} />
+      <Tab.Screen
+        name="Matérias"
+        component={Home}
+        options={{
+          unmountOnBlur: true,
+        }}
+      />
       <Tab.Screen
         options={{
           unmountOnBlur: true,

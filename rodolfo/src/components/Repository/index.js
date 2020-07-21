@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-import getRealm from '../../services/realm';
+import getRealm from '../../../services/realm';
 import {
   Container,
   Name,
@@ -25,7 +25,6 @@ import {
 import Plus from 'react-native-vector-icons/MaterialIcons';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-
 const Repository = ({data}) => {
   const [render, setRender] = useState(false);
   const [stringNotes, setString] = useState('');
@@ -43,31 +42,30 @@ const Repository = ({data}) => {
     } catch (err) {
       setError(true);
       console.log('não cadastrou');
+      // eslint-disable-next-line no-alert
       alert('Erro, tente novamente');
     }
   }
 
-
-
-  async function avgArray(){
+  async function avgArray() {
     const realm = await getRealm();
     let notasdadb = realm.objects('Repository');
     let gradesdb = notasdadb.filtered(`materia BEGINSWITH "${name}"`);
     var sum = 0;
     var size = 0;
 
+    // eslint-disable-next-line no-unused-vars
     for (let p of gradesdb) {
       size += parseFloat(p.grades.length);
-      
-      for (let num of p.grades){
+
+      // eslint-disable-next-line no-unused-vars
+      for (let num of p.grades) {
         sum += num;
       }
+    }
 
-  };
-
-    setMedia(sum/size);
+    setMedia(sum / size);
   }
-
 
   //Realm database
   async function saveRepository() {
@@ -77,41 +75,40 @@ const Repository = ({data}) => {
     let notesdb = notasdadb.filtered(`materia BEGINSWITH "${name}"`);
     realm.write(() => {
       if (stringNotes !== '') {
+        // eslint-disable-next-line no-unused-vars
         for (let p of notesdb) {
-          if (p.notes.length != 0){
-          `  ${p.notes.push("\n" + String(stringNotes))}`;
+          if (p.notes.length !== 0) {
+            `  ${p.notes.push('\n' + String(stringNotes))}`;
           } else {
             `  ${p.notes.push(String(stringNotes))}`;
           }
         }
       }
       if (grade !== 0) {
+        // eslint-disable-next-line no-unused-vars
         for (let p of gradesdb) {
           `  ${p.grades.push(parseFloat(grade))}`;
           avgArray();
-          }   
+        }
       }
     });
-    
+
     return data;
   }
 
-
-
-
-  function setRenderingTrue() {
+  function expandSubjectCard() {
     setRender(true);
   }
 
-  function setRederingFalse() {
+  function contractSubjectCard() {
     setRender(false);
   }
 
-  function setOverviewRenderingTrue() {
+  function expandInsertDataCard() {
     setOverview(true);
   }
 
-  function setOverviewRederingFalse() {
+  function contractInsertDataCard() {
     setOverview(false);
   }
   //Main page
@@ -123,7 +120,7 @@ const Repository = ({data}) => {
           <Description>{data.goal}</Description>
         </Stat>
 
-        <Refresh onPress={setRenderingTrue}>
+        <Refresh onPress={expandSubjectCard}>
           <Icon name="arrow-right" color="#7159c1" size={16} />
           <RefreshText>Abrir</RefreshText>
         </Refresh>
@@ -132,7 +129,6 @@ const Repository = ({data}) => {
   }
   //Overview cards
   if (render === true) {
-
     //Main overview card
     if (overviewrender === false) {
       return (
@@ -147,13 +143,12 @@ const Repository = ({data}) => {
           </StatsTrue>
 
           <BotoesOverview>
-            <Voltar onPress={setRederingFalse}>
+            <Voltar onPress={contractSubjectCard}>
               <Icon name="arrow-left" color="#7159c1" size={16} />
               <RefreshText>Voltar</RefreshText>
             </Voltar>
 
-
-            <Dados onPress={setOverviewRenderingTrue}>
+            <Dados onPress={expandInsertDataCard}>
               <Icon name="arrow-right" color="#7159c1" size={16} />
               <RefreshText>Inserir Dados</RefreshText>
             </Dados>
@@ -194,7 +189,7 @@ const Repository = ({data}) => {
             <Plus name="add" size={42} color="#FFF" />
           </Submit>
 
-          <Voltar onPress={setOverviewRederingFalse}>
+          <Voltar onPress={contractInsertDataCard}>
             <Icon name="arrow-left" color="#7159c1" size={16} />
             <RefreshText>Voltar</RefreshText>
           </Voltar>

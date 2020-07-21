@@ -12,9 +12,6 @@ export default function App() {
   const [goal, setGoal] = useState('');
   const [error, setError] = useState(false);
 
-
-
-
   async function saveRepository() {
     const data = {
       materia: materia,
@@ -33,6 +30,7 @@ export default function App() {
     try {
       saveRepository();
       console.log('deu certo');
+      // eslint-disable-next-line no-alert
       alert('Matéria cadastrada com sucesso');
       setMateria('');
       setGoal('');
@@ -40,6 +38,7 @@ export default function App() {
     } catch (err) {
       setError(true);
       console.log('não cadastrou');
+      // eslint-disable-next-line no-alert
       alert('Erro, tente novamente');
     }
   }
@@ -80,6 +79,7 @@ export default function App() {
             keyboardType = "numeric"
           />
         </Form>
+
         <Submit onPress={handleAddRepository}>
             <Icon name="add" size={42} color="#FFF" />
           </Submit>
