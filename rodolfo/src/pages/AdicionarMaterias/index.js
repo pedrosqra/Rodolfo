@@ -11,11 +11,13 @@ export default function App() {
   const [materia, setMateria] = useState('');
   const [goal, setGoal] = useState('');
   const [error, setError] = useState(false);
+  const [average, setAverage] = useState('0');
 
   async function saveRepository() {
     const data = {
       materia: materia,
       goal: goal,
+      average: average,
     };
 
     const realm = await getRealm();

@@ -7,6 +7,7 @@ export default class Materias {
       goal: 'string',
       grades: 'float?[]',
       notes: 'string?[]',
+      average: 'string?'
     },
   };
 }
