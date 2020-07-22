@@ -65,6 +65,13 @@ const Repository = ({data}) => {
     }
 
     setMedia(sum / size);
+
+
+    realm.write(() => {
+      realm.create('Repository', {materia: `${name}`, average: `${media}`}, 'modified');
+    });
+
+    
   }
 
   //Realm database
