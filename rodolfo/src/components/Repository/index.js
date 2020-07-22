@@ -21,6 +21,9 @@ import {
   Dados,
   Voltar,
   BotoesOverview,
+  Average,
+  Details,
+  YourNotes,
 } from './styles';
 import Plus from 'react-native-vector-icons/MaterialIcons';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -32,7 +35,8 @@ const Repository = ({data}) => {
   const [error, setError] = useState(false);
   const [overviewrender, setOverview] = useState(false);
   const name = data.materia;
-  const [media, setMedia] = useState(0);
+  const [media, setMedia] = useState('0');
+  const [listagem, setListagem] = useState('');
 
   async function handleAddRepository() {
     try {
@@ -74,12 +78,30 @@ const Repository = ({data}) => {
     
   }
 
+  async function listagemNotas(){
+    const realm = await getRealm();
+    let notasdadb = realm.objects('Repository');
+    let gradesdb = notasdadb.filtered(`materia BEGINSWITH "${name}"`);
+    let saida = '';
+    
+
+    for (let p of gradesdb) {
+      for (let num of p.grades) {
+        saida += "   ||   " + String(num);
+      
+    }
+
+    setListagem(saida);
+    }
+  }
+
   //Realm database
   async function saveRepository() {
     const realm = await getRealm();
     let notasdadb = realm.objects('Repository');
     let gradesdb = notasdadb.filtered(`materia BEGINSWITH "${name}"`);
     let notesdb = notasdadb.filtered(`materia BEGINSWITH "${name}"`);
+
     realm.write(() => {
       if (stringNotes !== '') {
         // eslint-disable-next-line no-unused-vars
@@ -96,6 +118,7 @@ const Repository = ({data}) => {
         for (let p of gradesdb) {
           `  ${p.grades.push(parseFloat(grade))}`;
           avgArray();
+          listagemNotas();
         }
       }
     });
@@ -125,6 +148,7 @@ const Repository = ({data}) => {
         <Stat>
           <Name>{data.materia}</Name>
           <Description>{data.goal}</Description>
+          <Average>{data.average}</Average>
         </Stat>
 
         <Refresh onPress={expandSubjectCard}>
@@ -142,10 +166,10 @@ const Repository = ({data}) => {
         <ContainerTrue>
           <StatsTrue>
             <NameTrue>{data.materia}</NameTrue>
-            <GradeGoal>Objetivo de média: {data.goal}</GradeGoal>
-            <GradeAverage>Média atual: {media}</GradeAverage>
-            <GradeAverage>Histórico de notas: {data.grades}</GradeAverage>
-            <Name>Suas Anotações:</Name>
+            <Details>Objetivo de média: {data.goal}</Details>
+            <Details>Média atual: {data.average}</Details>
+            <Details>Histórico de notas: {listagem}</Details>
+            <YourNotes>Suas Anotações:</YourNotes>
             <Notes>{data.notes}</Notes>
           </StatsTrue>
 
