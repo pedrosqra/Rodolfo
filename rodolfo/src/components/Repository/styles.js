@@ -164,3 +164,8 @@ export const InserirDados = styled.Text`
   color: #333b;
 `;
 
+export const DeleteButton = styled.TouchableOpacity`
+  margin-top: 20px;
+  flex-direction: row;
+  align-items: center;
+`;

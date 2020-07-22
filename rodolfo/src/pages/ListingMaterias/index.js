@@ -39,7 +39,7 @@ export default function App() {
           data={repositories}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({item}) => (
-            <Repository data={item}/>
+            <Repository  data={item}/>
           )}
         />
       </Container>
