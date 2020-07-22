@@ -37,6 +37,13 @@ export const Name = styled.Text`
   color: #333;
 `;
 
+export const YourNotes = styled.Text`
+  font-size: 25px;
+  font-weight: bold;
+  color: #333;
+  margin-top: 25px;
+`;
+
 export const Texto = styled.Text`
   font-size: 18px;
   font-weight: bold;
@@ -48,6 +55,22 @@ export const Description = styled.Text.attrs({
 })`
   color: #4169e1;
   margin-top: 15px;
+  font-size: 25px;
+`;
+
+export const Details = styled.Text.attrs({
+  numberOfLines: 2,
+})`
+  color: #4169e1;
+  margin-top: 10px;
+  font-size: 17px;
+`;
+
+export const Average = styled.Text.attrs({
+  numberOfLines: 2,
+})`
+  color: #000;
+  margin-top: 5px;
   font-size: 25px;
 `;
 

@@ -22,6 +22,9 @@ import {
   Dados,
   Voltar,
   BotoesOverview,
+  Average,
+  Details,
+  YourNotes,
   DeleteButton,
 } from './styles';
 import Plus from 'react-native-vector-icons/MaterialIcons';
@@ -35,7 +38,9 @@ const Repository = ({data}) => {
   const [error, setError] = useState(false);
   const [overviewrender, setOverview] = useState(false);
   const name = data.materia;
-  const [media, setMedia] = useState(0);
+  const [media, setMedia] = useState('0');
+  const [listagem, setListagem] = useState('');
+  const [restante, setRestante] = useState(0);
 
   async function handleAddRepository() {
     try {
@@ -65,9 +70,47 @@ const Repository = ({data}) => {
       for (let num of p.grades) {
         sum += num;
       }
+      if (parseFloat(p.grades.length) === 0) {
+        setMedia('0');
+      } else {
+        setMedia(sum / size);
+      }
     }
 
-    setMedia(sum / size);
+    realm.write(() => {
+      realm.create(
+        'Repository',
+        {materia: `${name}`, average: `${media}`},
+        'modified',
+      );
+    });
+  }
+
+  async function listagemNotas() {
+    const realm = await getRealm();
+    let notasdadb = realm.objects('Repository');
+    let gradesdb = notasdadb.filtered(`materia BEGINSWITH "${name}"`);
+    let saida = '';
+
+    for (let p of gradesdb) {
+      for (let num of p.grades) {
+        saida += '   ||   ' + String(num);
+      }
+      setListagem(saida);
+    }
+  }
+
+  async function restantes() {
+    const realm = await getRealm();
+    let notasdadb = realm.objects('Repository');
+    let gradesdb = notasdadb.filtered(`materia BEGINSWITH "${name}"`);
+    let saida = 0;
+
+    for (let p of gradesdb) {
+      saida += parseFloat(p.goal) - parseFloat(p.average);
+    }
+
+    setRestante(saida);
   }
 
   //Realm database
@@ -76,6 +119,7 @@ const Repository = ({data}) => {
     let notasdadb = realm.objects('Repository');
     let gradesdb = notasdadb.filtered(`materia BEGINSWITH "${name}"`);
     let notesdb = notasdadb.filtered(`materia BEGINSWITH "${name}"`);
+
     realm.write(() => {
       if (stringNotes !== '') {
         // eslint-disable-next-line no-unused-vars
@@ -91,7 +135,7 @@ const Repository = ({data}) => {
         // eslint-disable-next-line no-unused-vars
         for (let p of gradesdb) {
           `  ${p.grades.push(parseFloat(grade))}`;
-          avgArray();
+          listagemNotas();
         }
       }
     });
@@ -110,6 +154,7 @@ const Repository = ({data}) => {
   }
 
   avgArray();
+  restantes();
   function expandSubjectCard() {
     setRender(true);
   }
@@ -132,6 +177,7 @@ const Repository = ({data}) => {
         <Stat>
           <Name>{data.materia}</Name>
           <Description>{data.goal}</Description>
+          <Average>{data.average}</Average>
         </Stat>
 
         <Refresh onPress={expandSubjectCard}>
@@ -154,10 +200,11 @@ const Repository = ({data}) => {
         <ContainerTrue>
           <StatsTrue>
             <NameTrue>{data.materia}</NameTrue>
-            <GradeGoal>Objetivo de média: {data.goal}</GradeGoal>
-            <GradeAverage>Média atual: {media}</GradeAverage>
-            <GradeAverage>Histórico de notas: {data.grades}</GradeAverage>
-            <Name>Suas Anotações:</Name>
+            <Details>Objetivo de média: {data.goal}</Details>
+            <Details>Média atual: {media}</Details>
+            <Details>Histórico de notas: {listagem}</Details>
+            <Details>Faltam {restante} pontos até o objetivo.</Details>
+            <YourNotes>Suas Anotações:</YourNotes>
             <Notes>{data.notes}</Notes>
           </StatsTrue>
 
