@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 
 import getRealm from '../../../services/realm';
+
 import {
   Container,
   Name,
@@ -24,9 +25,11 @@ import {
   Average,
   Details,
   YourNotes,
+  DeleteButton,
 } from './styles';
 import Plus from 'react-native-vector-icons/MaterialIcons';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import TrashCan from 'react-native-vector-icons/MaterialIcons';
 
 const Repository = ({data}) => {
   const [render, setRender] = useState(false);
@@ -67,24 +70,23 @@ const Repository = ({data}) => {
       for (let num of p.grades) {
         sum += num;
       }
-      if (parseFloat(p.grades.length) === 0){
+      if (parseFloat(p.grades.length) === 0) {
         setMedia('0');
-      } else{
+      } else {
         setMedia(sum / size);
       }
     }
 
-    
-
-
     realm.write(() => {
-      realm.create('Repository', {materia: `${name}`, average: `${media}`}, 'modified');
+      realm.create(
+        'Repository',
+        {materia: `${name}`, average: `${media}`},
+        'modified',
+      );
     });
-
-    
   }
 
-  async function listagemNotas(){
+  async function listagemNotas() {
     const realm = await getRealm();
     let notasdadb = realm.objects('Repository');
     let gradesdb = notasdadb.filtered(`materia BEGINSWITH "${name}"`);
@@ -92,14 +94,13 @@ const Repository = ({data}) => {
 
     for (let p of gradesdb) {
       for (let num of p.grades) {
-        saida += "   ||   " + String(num);
-      
-    }
-    setListagem(saida);
+        saida += '   ||   ' + String(num);
+      }
+      setListagem(saida);
     }
   }
 
-  async function restantes(){
+  async function restantes() {
     const realm = await getRealm();
     let notasdadb = realm.objects('Repository');
     let gradesdb = notasdadb.filtered(`materia BEGINSWITH "${name}"`);
@@ -110,9 +111,7 @@ const Repository = ({data}) => {
     }
 
     setRestante(saida);
-    }
-
-
+  }
 
   //Realm database
   async function saveRepository() {
@@ -143,6 +142,17 @@ const Repository = ({data}) => {
 
     return data;
   }
+
+  async function deleteSubject() {
+    const realm = await getRealm();
+    let subs = realm.objects('Repository');
+    let specificsub = subs.filtered(`materia = "${name}"`);
+    realm.write(() => {
+      realm.delete(specificsub);
+    });
+    alert('Matéria Apagada');
+  }
+
   avgArray();
   restantes();
   
@@ -175,6 +185,11 @@ const Repository = ({data}) => {
           <Icon name="arrow-right" color="#7159c1" size={16} />
           <RefreshText>Abrir</RefreshText>
         </Refresh>
+
+        <DeleteButton onPress={deleteSubject}>
+          <TrashCan name="delete" color="#FF0000" size={16} />
+          <RefreshText>Apagar</RefreshText>
+        </DeleteButton>
       </Container>
     );
   }
