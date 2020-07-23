@@ -1,14 +1,14 @@
 /* eslint-disable prettier/prettier */
 
 import React, { useState, useEffect } from 'react';
-import {StatusBar} from 'react-native';
+import {StatusBar, TouchableOpacity} from 'react-native';
 
 import getRealm from '../../../services/realm';
 
 import Repository from '../../components/Repository/index';
 import {Container, List, Title} from './styles';
 
-export default function App() {
+export default function App({navigation}) {
   const [repositories, setRepositories] = useState([]);
 
 
@@ -39,7 +39,9 @@ export default function App() {
           data={repositories}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({item}) => (
-            <Repository  data={item}/>
+            <TouchableOpacity onPress={() => navigation.navigate('Overview', item)}>
+              <Repository  data={item}/>
+            </TouchableOpacity>
           )}
         />
       </Container>
