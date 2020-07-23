@@ -46,6 +46,7 @@ const Repository = ({data}) => {
     try {
       saveRepository();
       console.log('deu certo');
+      alert('Nota adicionada com sucesso!!!');
       setError(false);
     } catch (err) {
       setError(true);
