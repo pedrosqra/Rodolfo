@@ -38,7 +38,7 @@ const Repository = ({data}) => {
   const [error, setError] = useState(false);
   const [overviewrender, setOverview] = useState(false);
   const name = data.materia;
-  const [media, setMedia] = useState('0');
+  const [media, setMedia] = useState(0);
   const [listagem, setListagem] = useState('');
   const [restante, setRestante] = useState(0);
 
@@ -154,9 +154,6 @@ const Repository = ({data}) => {
     });
     alert('Matéria Apagada');
   }
-
-  avgArray();
-  restantes();
   
   function expandSubjectCard() {
     setRender(true);
@@ -173,6 +170,10 @@ const Repository = ({data}) => {
   function contractInsertDataCard() {
     setOverview(false);
   }
+
+
+  avgArray();
+  restantes();
   //Main page
   if (render === false) {
     return (
@@ -180,7 +181,7 @@ const Repository = ({data}) => {
         <Stat>
           <Name>{data.materia}</Name>
           <Description>{data.goal}</Description>
-          <Average>{media.toFixed(2)}</Average>
+          <Average>{parseFloat(media).toFixed(2)}</Average>
         </Stat>
 
         <Refresh onPress={expandSubjectCard}>
@@ -204,7 +205,7 @@ const Repository = ({data}) => {
           <StatsTrue>
             <NameTrue>{data.materia}</NameTrue>
             <Details>Objetivo de média: {data.goal}</Details>
-            <Details>Média atual: {media.toFixed(2)}</Details>
+            <Details>Média atual: {parseFloat(media).toFixed(2)}</Details>
             <Details>Histórico de notas: {listagem}</Details>
             <Details>Faltam {restante} pontos até o objetivo.</Details>
             <YourNotes>Suas Anotações:</YourNotes>
