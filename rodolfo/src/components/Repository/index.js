@@ -180,7 +180,7 @@ const Repository = ({data}) => {
         <Stat>
           <Name>{data.materia}</Name>
           <Description>{data.goal}</Description>
-          <Average>{data.average}</Average>
+          <Average>{media.toFixed(2)}</Average>
         </Stat>
 
         <Refresh onPress={expandSubjectCard}>
