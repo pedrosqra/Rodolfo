@@ -110,7 +110,9 @@ const Repository = ({data}) => {
       saida += parseFloat(p.goal) - parseFloat(p.average);
     }
 
-    setRestante(saida);
+    const total = saida.toFixed(2);
+
+    setRestante(total);
   }
 
   //Realm database
@@ -202,7 +204,7 @@ const Repository = ({data}) => {
           <StatsTrue>
             <NameTrue>{data.materia}</NameTrue>
             <Details>Objetivo de média: {data.goal}</Details>
-            <Details>Média atual: {media}</Details>
+            <Details>Média atual: {media.toFixed(2)}</Details>
             <Details>Histórico de notas: {listagem}</Details>
             <Details>Faltam {restante} pontos até o objetivo.</Details>
             <YourNotes>Suas Anotações:</YourNotes>
