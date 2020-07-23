@@ -2,9 +2,11 @@ import styled from 'styled-components/native';
 
 export const Container = styled.View`
   padding: 20px;
-  border-radius: 4px;
+  height: 180px;
+  border-radius: 8px;
   background: #fff;
   margin-bottom: 15px;
+  
 `;
 
 export const BotoesOverview = styled.View`
@@ -35,6 +37,7 @@ export const Name = styled.Text`
   font-size: 25px;
   font-weight: bold;
   color: #333;
+  margin-top: 5px;
 `;
 
 export const YourNotes = styled.Text`
@@ -54,7 +57,7 @@ export const Description = styled.Text.attrs({
   numberOfLines: 2,
 })`
   color: #4169e1;
-  margin-top: 15px;
+  margin-top: 5px;
   font-size: 25px;
 `;
 
