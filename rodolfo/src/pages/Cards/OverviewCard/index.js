@@ -1,25 +1,26 @@
 import React, {useState} from 'react';
-
+import {ScrollView, Dimensions} from 'react-native';
 import getRealm from '../../../../services/realm';
-
+import Arrow from 'react-native-vector-icons/FontAwesome';
 import {
   RefreshText,
   ContainerTrue,
   StatsTrue,
   NameTrue,
   Notes,
-  Dados,
-  BotoesOverview,
   Details,
   YourNotes,
+  Voltar,
+  InserirDados,
 } from './styles';
-import Icon from 'react-native-vector-icons/FontAwesome';
 
-export default function Overview({navigation}) {
+export default function Overview({route, navigation}) {
   const [listagem, setListagem] = useState('');
   const [restante, setRestante] = useState(0);
-  const name = navigation.getParam('materia');
+  const {name, goal, notes} = route.params;
   const [media, setMedia] = useState(0);
+  const {height} = Dimensions.get('window');
+  const [screenHeight, setHeight] = useState(0);
   async function listagemNotas() {
     const realm = await getRealm();
     let notasdadb = realm.objects('Repository');
@@ -52,8 +53,12 @@ export default function Overview({navigation}) {
     setRestante(total);
   }
 
-  const pressHandler = () => {
-    navigation.navigate('InserirDados', {name: name});
+  const Go = () => {
+    navigation.navigate('Root', {screen: 'InsertData', params: {name: name}});
+  };
+
+  const Back = () => {
+    navigation.navigate('Root', {screen: 'Home', params: {name: name}});
   };
 
   async function avgArray() {
@@ -90,23 +95,33 @@ export default function Overview({navigation}) {
   listagemNotas();
   restantes();
 
+  function onContentSizeChange(contentWidth, contentHeight) {
+    setHeight(contentHeight);
+  }
+  const scrollEnabled = screenHeight > height;
   return (
-    <ContainerTrue>
-      <StatsTrue>
-        <NameTrue>{navigation.getParam('materia')}</NameTrue>
-        <Details>Objetivo de média: {navigation.getParam('goal')}</Details>
-        <Details>Média atual: {parseFloat(media).toFixed(2)}</Details>
-        <Details>Histórico de notas: {listagem}</Details>
-        <Details>Faltam {restante} pontos até o objetivo.</Details>
-        <YourNotes>Suas Anotações:</YourNotes>
-        <Notes>{navigation.getParam('notes')}</Notes>
-      </StatsTrue>
-      <BotoesOverview>
-        <Dados onPress={pressHandler}>
-          <Icon name="arrow-right" color="#7159c1" size={16} />
+    <ScrollView
+      scrollEnabled={scrollEnabled}
+      onContentSizeChange={onContentSizeChange}>
+      <ContainerTrue>
+        <StatsTrue>
+          <NameTrue>{name}</NameTrue>
+          <Details>Objetivo de média: {goal}</Details>
+          <Details>Média atual: {parseFloat(media).toFixed(2)}</Details>
+          <Details>Histórico de notas: {listagem}</Details>
+          <Details>Faltam {restante} pontos até o objetivo.</Details>
+          <YourNotes>Suas Anotações:</YourNotes>
+          <Notes>{notes}</Notes>
+        </StatsTrue>
+
+        <InserirDados onPress={Go}>
           <RefreshText>Inserir Dados</RefreshText>
-        </Dados>
-      </BotoesOverview>
-    </ContainerTrue>
+        </InserirDados>
+
+        <Voltar title="Voltar" onPress={Back}>
+          <Arrow name="arrow-left" size={25} color="#FFF" />
+        </Voltar>
+      </ContainerTrue>
+    </ScrollView>
   );
 }

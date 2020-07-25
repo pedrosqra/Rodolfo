@@ -39,7 +39,7 @@ export default function App({navigation}) {
           data={repositories}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({item}) => (
-            <TouchableOpacity onPress={() => navigation.navigate('Overview', item)}>
+            <TouchableOpacity onPress={() => navigation.navigate('Root', {screen: 'Overview', params: {name: item.materia, goal: item.goal, notes: item.notes}})}>
               <Repository  data={item}/>
             </TouchableOpacity>
           )}

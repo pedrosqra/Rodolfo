@@ -1,18 +1,18 @@
 import React, {useState} from 'react';
 
 import getRealm from '../../../../services/realm';
-import {Button} from 'react-native';
 import {ContainerTrue, Form, Input, Submit, InserirDados} from './styles';
 import Plus from 'react-native-vector-icons/MaterialIcons';
-
-export default function Overview({navigation}) {
-  const name = String(navigation.getParam('name'));
+import Arrow from 'react-native-vector-icons/FontAwesome';
+export default function Overview({route, navigation}) {
+  const {name} = route.params;
   const [stringNotes, setString] = useState('');
   const [grade, setGrade] = useState(0);
   const [error, setError] = useState(false);
 
   const pressHandler = () => {
-    navigation.navigate('Overview');
+    avgArray();
+    navigation.navigate('Root', {screen: 'Overview'});
   };
 
   async function handleAddRepository() {
@@ -55,6 +55,38 @@ export default function Overview({navigation}) {
       }
     });
   }
+
+  const [media, setMedia] = useState(0);
+  async function avgArray() {
+    const realm = await getRealm();
+    let notasdadb = realm.objects('Repository');
+    let gradesdb = notasdadb.filtered(`materia BEGINSWITH "${name}"`);
+    var sum = 0;
+    var size = 0;
+
+    // eslint-disable-next-line no-unused-vars
+    for (let p of gradesdb) {
+      size += parseFloat(p.grades.length);
+
+      // eslint-disable-next-line no-unused-vars
+      for (let num of p.grades) {
+        sum += num;
+      }
+      if (parseFloat(p.grades.length) === 0) {
+        setMedia('0');
+      } else {
+        setMedia(sum / size);
+      }
+    }
+
+    realm.write(() => {
+      realm.create(
+        'Repository',
+        {materia: `${name}`, average: `${media}`},
+        'modified',
+      );
+    });
+  }
   return (
     <ContainerTrue>
       <InserirDados>Inserir Anotações</InserirDados>
@@ -72,6 +104,7 @@ export default function Overview({navigation}) {
       <InserirDados>Inserir Notas</InserirDados>
       <Form>
         <Input
+          blurOnSubmit={true}
           value={grade}
           error={error}
           onChangeText={setGrade}
@@ -82,11 +115,13 @@ export default function Overview({navigation}) {
         />
       </Form>
 
-      <Submit onPress={handleAddRepository} onSubmit={pressHandler}>
+      <Submit onPress={handleAddRepository}>
         <Plus name="add" size={42} color="#FFF" />
       </Submit>
 
-      <Button title="Voltar para tela inicial" onPress={pressHandler} />
+      <Submit title="Voltar" onPress={pressHandler}>
+        <Arrow name="arrow-left" size={25} color="#FFF" />
+      </Submit>
     </ContainerTrue>
   );
 }
