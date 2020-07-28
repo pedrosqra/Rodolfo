@@ -8,7 +8,8 @@ a main grade that is your average goal for that subject. Rodolfo will show you y
 
 ### Made with
  * [React Native](https://reactnative.dev/)
- * [React Navigation](https://reactnavigation.org/docs/bottom-tab-navigator/)
+ * [React Navigation (Drawer)](https://reactnavigation.org/docs/drawer-based-navigation)
+ * [React Navigation (Stack)](https://reactnavigation.org/docs/stack-navigator/)
  * [Realm](https://realm.io/docs/javascript/latest)
  
 
