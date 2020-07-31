@@ -18,13 +18,6 @@ export const Title = styled.Text`
   padding: 10% 20px;
 `;
 
-export const TextButton = styled.Text`
-  font-size: 20px;
-  color: white;
-  font-weight: bold;
-  padding: 40px 40px;
-`;
-
 export const Texto = styled.Text`
   font-size: 25px;
   color: white;

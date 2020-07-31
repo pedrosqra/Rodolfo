@@ -1,24 +1,23 @@
 /* eslint-disable prettier/prettier */
 import React, { useState } from 'react';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import {StatusBar} from 'react-native';
 
 import getRealm from '../../../services/realm';
 
-import { Container, Title, Input, Submit, Form, Texto} from './styles';
+import {Container, Title, Input, Submit, Form, Texto} from './styles';
 
 export default function App() {
   const [materia, setMateria] = useState('');
   const [goal, setGoal] = useState('');
   const [error, setError] = useState(false);
-  const [average, setAverage] = useState('0');
 
 
   async function saveRepository() {
     const data = {
       materia: materia,
       goal: goal,
-      average: average,
+      average: '0',
     };
 
     const realm = await getRealm();
@@ -84,8 +83,8 @@ export default function App() {
         </Form>
 
         <Submit onPress={handleAddRepository}>
-            <Icon name="add" size={42} color="#FFF" />
-          </Submit>
+            <Icon name="plus-circle" size={32} color="#FFF" />
+        </Submit>
 
 
       </Container>

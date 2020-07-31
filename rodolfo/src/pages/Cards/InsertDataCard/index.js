@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
 
 import getRealm from '../../../../services/realm';
-import {ContainerTrue, Form, Input, Submit, InserirDados} from './styles';
-import Plus from 'react-native-vector-icons/MaterialIcons';
-import Arrow from 'react-native-vector-icons/FontAwesome';
-export default function Overview({route, navigation}) {
+import {Container, Form, Input, Submit, Title, Text} from './styles';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import {BackHandler} from 'react-native';
+
+export default function Overview({route, navigation, props}) {
   const {name} = route.params;
   const [stringNotes, setString] = useState('');
   const [grade, setGrade] = useState(0);
@@ -14,6 +15,14 @@ export default function Overview({route, navigation}) {
     avgArray();
     navigation.navigate('Root', {screen: 'Overview'});
   };
+
+  function componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', onBackPress);
+  }
+
+  function onBackPress() {
+    return true;
+  }
 
   async function handleAddRepository() {
     try {
@@ -87,9 +96,12 @@ export default function Overview({route, navigation}) {
       );
     });
   }
+
+  componentDidMount();
+
   return (
-    <ContainerTrue>
-      <InserirDados>Inserir Anotações</InserirDados>
+    <Container>
+      <Title>Inserir Anotações</Title>
       <Form>
         <Input
           value={stringNotes}
@@ -101,7 +113,7 @@ export default function Overview({route, navigation}) {
           keyboardType="default"
         />
       </Form>
-      <InserirDados>Inserir Notas</InserirDados>
+      <Title>Inserir Notas</Title>
       <Form>
         <Input
           blurOnSubmit={true}
@@ -116,12 +128,14 @@ export default function Overview({route, navigation}) {
       </Form>
 
       <Submit onPress={handleAddRepository}>
-        <Plus name="add" size={42} color="#FFF" />
+        <Icon name="plus-circle" size={32} color="#FFF" />
+        <Text>Adicionar</Text>
       </Submit>
 
       <Submit title="Voltar" onPress={pressHandler}>
-        <Arrow name="arrow-left" size={25} color="#FFF" />
+        <Icon name="arrow-circle-left" size={32} color="#FFF" />
+        <Text>Voltar</Text>
       </Submit>
-    </ContainerTrue>
+    </Container>
   );
 }

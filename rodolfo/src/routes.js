@@ -50,7 +50,7 @@ export default function App() {
     <NavigationContainer theme={Theme}>
       <Drawer.Navigator initialRouteName="Root">
         <Drawer.Screen
-          options={{title: 'Matérias'}}
+          options={{title: 'Matérias', unmountOnBlur: true}}
           name="Root"
           component={Root}
         />

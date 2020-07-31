@@ -1,17 +1,19 @@
 import React, {useState} from 'react';
 import {ScrollView, Dimensions} from 'react-native';
 import getRealm from '../../../../services/realm';
-import Arrow from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import {BackHandler, Alert} from 'react-native';
 import {
-  RefreshText,
-  ContainerTrue,
-  StatsTrue,
-  NameTrue,
+  Text,
+  Container,
+  Stats,
+  Name,
   Notes,
   Details,
   YourNotes,
   Voltar,
   InserirDados,
+  DeleteButton,
 } from './styles';
 
 export default function Overview({route, navigation}) {
@@ -35,6 +37,33 @@ export default function Overview({route, navigation}) {
       }
       setListagem(saida);
     }
+  }
+
+  async function deleteSubject() {
+    const realm = await getRealm();
+    Alert.alert(
+      'Calma aí, tem certeza que quer apagar essa matéria?',
+      'Você está tentando apagar uma matéria. Confirme ou negue a requisição.',
+      [
+        {
+          text: 'Certeza!',
+          onPress: () => {
+            let subs = realm.objects('Repository');
+            let specificsub = subs.filtered(`materia = "${name}"`);
+            realm.write(() => {
+              realm.delete(specificsub);
+            });
+            navigation.navigate('Root', {screen: 'Home'});
+            navigation.navigate('Adicionar');
+          },
+        },
+        {
+          text: 'Não!',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+      ],
+    );
   }
 
   async function restantes() {
@@ -91,6 +120,16 @@ export default function Overview({route, navigation}) {
       );
     });
   }
+
+  function componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', onBackPress);
+  }
+
+  function onBackPress() {
+    return true;
+  }
+
+  componentDidMount();
   avgArray();
   listagemNotas();
   restantes();
@@ -103,25 +142,32 @@ export default function Overview({route, navigation}) {
     <ScrollView
       scrollEnabled={scrollEnabled}
       onContentSizeChange={onContentSizeChange}>
-      <ContainerTrue>
-        <StatsTrue>
-          <NameTrue>{name}</NameTrue>
+      <Container>
+        <Stats>
+          <Name>{name}</Name>
           <Details>Objetivo de média: {goal}</Details>
           <Details>Média atual: {parseFloat(media).toFixed(2)}</Details>
           <Details>Histórico de notas: {listagem}</Details>
           <Details>Faltam {restante} pontos até o objetivo.</Details>
           <YourNotes>Suas Anotações:</YourNotes>
           <Notes>{notes}</Notes>
-        </StatsTrue>
+        </Stats>
 
         <InserirDados onPress={Go}>
-          <RefreshText>Inserir Dados</RefreshText>
+          <Icon name="plus-circle" color="#fff" size={32} />
+          <Text>Inserir Dados</Text>
         </InserirDados>
 
         <Voltar title="Voltar" onPress={Back}>
-          <Arrow name="arrow-left" size={25} color="#FFF" />
+          <Icon name="arrow-circle-left" color="#fff" size={32} />
+          <Text>Voltar</Text>
         </Voltar>
-      </ContainerTrue>
+
+        <DeleteButton title="Voltar" onPress={deleteSubject}>
+          <Icon name="minus-circle" color="#fff" size={32} />
+          <Text>Apagar</Text>
+        </DeleteButton>
+      </Container>
     </ScrollView>
   );
 }

@@ -15,20 +15,21 @@ export const Details = styled.Text.attrs({
   font-size: 17px;
 `;
 
-export const RefreshText = styled.Text`
+export const Text = styled.Text`
   font-size: 20px;
   font-weight: bold;
   color: #fff;
+  margin-left: 10px;
   justify-content: space-evenly;
 `;
 
-export const StatsTrue = styled.View`
+export const Stats = styled.View`
   align-items: flex-start;
   margin-right: 15px;
 
   justify-content: space-between;
 `;
-export const ContainerTrue = styled.View`
+export const Container = styled.View`
   padding: 20px;
   border-radius: 8px;
   background: #fff;
@@ -36,7 +37,7 @@ export const ContainerTrue = styled.View`
   width: 100%;
 `;
 
-export const NameTrue = styled.Text`
+export const Name = styled.Text`
   margin-top: 15px
   flex-direction: row;
   font-size: 30px;
@@ -54,20 +55,36 @@ export const Voltar = styled.TouchableOpacity`
   background: #6bd4c1;
   margin-left: 20px;
   margin-right: 20px;
-  justify-content: space-evenly;
   border-radius: 8px;
   padding: 25px 14px;
   margin-top: 15px;
   height: 6px;
+  flex-direction: row;
+  align-items: center;
 `;
 
 export const InserirDados = styled.TouchableOpacity`
   background: #6bd4c1;
   margin-left: 20px;
   margin-right: 20px;
-  justify-content: center;
+  flex-direction: row;
   border-radius: 8px;
   padding: 25px 14px;
-  margin-top: 15px;
   height: 6px;
+  margin-top: 20px;
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const DeleteButton = styled.TouchableOpacity`
+  background: #ff0000;
+  margin-left: 20px;
+  margin-right: 20px;
+  flex-direction: row;
+  border-radius: 8px;
+  padding: 25px 14px;
+  height: 6px;
+  margin-top: 20px;
+  flex-direction: row;
+  align-items: center;
 `;
