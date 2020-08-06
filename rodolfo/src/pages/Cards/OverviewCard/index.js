@@ -46,6 +46,11 @@ export default function Overview({route, navigation}) {
       'Você está tentando apagar uma matéria. Confirme ou negue a requisição.',
       [
         {
+          text: 'Não!',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {
           text: 'Certeza!',
           onPress: () => {
             let subs = realm.objects('Repository');
@@ -56,11 +61,6 @@ export default function Overview({route, navigation}) {
             navigation.navigate('Root', {screen: 'Home'});
             navigation.navigate('Adicionar');
           },
-        },
-        {
-          text: 'Não!',
-          onPress: () => console.log('Cancel Pressed'),
-          style: 'cancel',
         },
       ],
     );
