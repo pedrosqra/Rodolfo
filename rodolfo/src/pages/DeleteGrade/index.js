@@ -21,7 +21,9 @@ export default function Delete({route, navigation}){
     const {name, goal, notes} = route.params;
     const {height} = Dimensions.get('window');
     const [screenHeight, setHeight] = useState(0);
-    const [id, setId] = useState(0);
+    const [id, setId] = useState();
+    const [error, setError] = useState(false);
+
 
 
 
@@ -37,6 +39,22 @@ export default function Delete({route, navigation}){
           }
           setListagem(saida);
         }
+    }
+
+    async function DeleteGrade(){
+        const realm = await getRealm();
+        let notasdadb = realm.objects('Repository');
+        let gradesdb = notasdadb.filtered(`materia BEGINSWITH "${name}"`);
+
+        realm.write(() => {
+            for (let p of gradesdb) {
+                if (p.grades.length !== 0) {
+                    const index = p.grades.indexOf(id-1);
+                    `  ${p.grades.splice(index, 1)}`;
+                } 
+            
+        }
+        });
     }
 
     function onContentSizeChange(contentWidth, contentHeight) {
@@ -70,9 +88,22 @@ export default function Delete({route, navigation}){
               <Details>Histórico de notas: {listagem}</Details>
             </Stats>
 
+            <Form>
+                <Input
+                blurOnSubmit={true}
+                value={id}
+                error={error}
+                onChangeText={setId}
+                autoCapitalize="none"
+                autoCorrect={false}
+                placeholder="Ex: 2, para excluir 'Nota2'"
+                keyboardType="numeric"
+                />
+            </Form>
+
             
 
-            <DeleteButton>
+            <DeleteButton onPress={DeleteGrade}>
                 <Icon name="trash" color="#fff" size={32} />
                 <Text>Deletar</Text>
             </DeleteButton>
@@ -86,8 +117,7 @@ export default function Delete({route, navigation}){
             
           </Container>
           
-       
-        
+
       );
 
 }

@@ -114,6 +114,7 @@ export default function Overview({route, navigation, props}) {
         />
       </Form>
       <Title>Inserir Nota</Title>
+      
       <Form>
         <Input
           blurOnSubmit={true}
