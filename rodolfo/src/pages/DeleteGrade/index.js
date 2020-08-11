@@ -49,9 +49,12 @@ export default function Delete({route, navigation}){
         realm.write(() => {
             for (let p of gradesdb) {
                 if (p.grades.length !== 0) {
-                    const index = p.grades.indexOf(id-1);
-                    `  ${p.grades.splice(index, 1)}`;
-                } 
+                    var index = p.grades.indexOf(id-1);
+                    p.grades.splice(id-1, 1);
+                    
+                } else {
+                    alert('Você não ainda não possui notas nessa matéria');
+                }
             
         }
         });
