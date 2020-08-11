@@ -101,7 +101,7 @@ export default function Overview({route, navigation, props}) {
 
   return (
     <Container>
-      <Title>Inserir Anotações</Title>
+      <Title>Inserir Anotação</Title>
       <Form>
         <Input
           value={stringNotes}
@@ -113,7 +113,7 @@ export default function Overview({route, navigation, props}) {
           keyboardType="default"
         />
       </Form>
-      <Title>Inserir Notas</Title>
+      <Title>Inserir Nota</Title>
       <Form>
         <Input
           blurOnSubmit={true}

@@ -23,6 +23,7 @@ export default function Overview({route, navigation}) {
   const [media, setMedia] = useState(0);
   const {height} = Dimensions.get('window');
   const [screenHeight, setHeight] = useState(0);
+
   async function listagemNotas() {
     const realm = await getRealm();
     let notasdadb = realm.objects('Repository');
@@ -33,7 +34,7 @@ export default function Overview({route, navigation}) {
     for (let p of gradesdb) {
       // eslint-disable-next-line no-unused-vars
       for (let num of p.grades) {
-        saida += '   ||   ' + String(num);
+        saida += `Nota${p.grades.indexOf(num) + 1} = ` + String(num) + ',  ';
       }
       setListagem(saida);
     }
@@ -46,7 +47,12 @@ export default function Overview({route, navigation}) {
       'Você está tentando apagar uma matéria. Confirme ou negue a requisição.',
       [
         {
-          text: 'Certeza!',
+          text: 'Não',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {
+          text: 'Certeza',
           onPress: () => {
             let subs = realm.objects('Repository');
             let specificsub = subs.filtered(`materia = "${name}"`);
@@ -56,11 +62,6 @@ export default function Overview({route, navigation}) {
             navigation.navigate('Root', {screen: 'Home'});
             navigation.navigate('Adicionar');
           },
-        },
-        {
-          text: 'Não!',
-          onPress: () => console.log('Cancel Pressed'),
-          style: 'cancel',
         },
       ],
     );
