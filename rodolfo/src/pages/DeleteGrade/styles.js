@@ -8,7 +8,7 @@ export const YourNotes = styled.Text`
 `;
 
 export const Details = styled.Text.attrs({
-  numberOfLines: 4,
+  numberOfLines: 45,
 })`
   color: #4169e1;
   margin-top: 10px;

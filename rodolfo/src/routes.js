@@ -6,6 +6,7 @@ import Home from './pages/ListingMaterias/index';
 import Overview from './pages/Cards/OverviewCard/index';
 import InsertData from './pages/Cards/InsertDataCard/index';
 import Adicionar from './pages/AdicionarMaterias/index';
+import DeleteGrade from './pages/DeleteGrade/index';
 
 const Drawer = createDrawerNavigator();
 
@@ -41,6 +42,7 @@ function Root({navigation}) {
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="Overview" component={Overview} />
       <Stack.Screen name="InsertData" component={InsertData} />
+      <Stack.Screen name="DeleteGrade" component={DeleteGrade} />
     </Stack.Navigator>
   );
 }

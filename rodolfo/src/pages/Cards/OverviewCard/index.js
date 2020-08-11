@@ -87,6 +87,10 @@ export default function Overview({route, navigation}) {
     navigation.navigate('Root', {screen: 'InsertData', params: {name: name}});
   };
 
+  const DeleteGrade = () => {
+    navigation.navigate('Root', {screen: 'DeleteGrade', params: {name:name}});
+  };
+ 
   const Back = () => {
     navigation.navigate('Root', {screen: 'Home', params: {name: name}});
   };
@@ -159,15 +163,22 @@ export default function Overview({route, navigation}) {
           <Text>Inserir Dados</Text>
         </InserirDados>
 
-        <Voltar title="Voltar" onPress={Back}>
-          <Icon name="arrow-circle-left" color="#fff" size={32} />
-          <Text>Voltar</Text>
-        </Voltar>
+        <DeleteButton onPress={DeleteGrade}>
+          <Icon name="trash" color="#fff" size={32} />
+          <Text>Excluir nota</Text>
+        </DeleteButton>
 
         <DeleteButton title="Voltar" onPress={deleteSubject}>
           <Icon name="minus-circle" color="#fff" size={32} />
           <Text>Apagar</Text>
         </DeleteButton>
+
+        <Voltar title="Voltar" onPress={Back}>
+          <Icon name="arrow-circle-left" color="#fff" size={32} />
+          <Text>Voltar</Text>
+        </Voltar>
+
+        
       </Container>
     </ScrollView>
   );
