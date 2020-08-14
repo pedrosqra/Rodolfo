@@ -36,7 +36,7 @@ export default function Overview({route, navigation}) {
     for (let p of gradesdb) {
       // eslint-disable-next-line no-unused-vars
       for (let num of p.grades) {
-        saida += `Nota ${p.grades.indexOf(num) + 1}:  ` + String(num) + '\n';
+        saida += `Nota ${p.grades.indexOf(num) + 1}:  ` + String(num) + '\n\n';
       }
       setListagem(saida);
     }
