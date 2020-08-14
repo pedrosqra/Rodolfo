@@ -7,23 +7,8 @@ export const YourNotes = styled.Text`
   margin-top: 25px;
 `;
 
-export const History = styled.Text`
-  font-size: 25px;
-  font-weight: bold;
-  color: #333;
-  margin-top: 25px;
-`;
-
 export const Details = styled.Text.attrs({
-  numberOfLines: 4,
-})`
-  color: #4169e1;
-  margin-top: 10px;
-  font-size: 17px;
-`;
-
-export const Grades = styled.Text.attrs({
-  numberOfLines: 100,
+  numberOfLines: 45,
 })`
   color: #4169e1;
   margin-top: 10px;
@@ -66,6 +51,13 @@ export const Notes = styled.Text`
   font-size: 20px;
 `;
 
+export const History = styled.Text`
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+  margin-top: 25px;
+`;
+
 export const Voltar = styled.TouchableOpacity`
   background: #6bd4c1;
   margin-left: 20px;
@@ -102,4 +94,30 @@ export const DeleteButton = styled.TouchableOpacity`
   margin-top: 20px;
   flex-direction: row;
   align-items: center;
+`;
+
+export const Form = styled.View`
+  flex-direction: row;
+  margin-top: 10px;
+  padding: 0 20px;
+`;
+
+export const Input = styled.TextInput.attrs({
+  placeHolderTextColor: '#999',
+})`
+  flex: 1;
+  padding: 12px 15px;
+  border-radius: 6px;
+  font-size: 16px;
+  color: #333;
+  background: white;
+  border: 2px solid ${props => (props.error ? '#FF7272' : '#6bd4c1')};
+`;
+
+export const Grades = styled.Text.attrs({
+  numberOfLines: 100,
+})`
+  color: #4169e1;
+  margin-top: 10px;
+  font-size: 17px;
 `;

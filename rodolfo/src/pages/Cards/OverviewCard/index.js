@@ -14,6 +14,8 @@ import {
   Voltar,
   InserirDados,
   DeleteButton,
+  Grades,
+  History,
 } from './styles';
 
 export default function Overview({route, navigation}) {
@@ -23,6 +25,7 @@ export default function Overview({route, navigation}) {
   const [media, setMedia] = useState(0);
   const {height} = Dimensions.get('window');
   const [screenHeight, setHeight] = useState(0);
+
   async function listagemNotas() {
     const realm = await getRealm();
     let notasdadb = realm.objects('Repository');
@@ -33,7 +36,7 @@ export default function Overview({route, navigation}) {
     for (let p of gradesdb) {
       // eslint-disable-next-line no-unused-vars
       for (let num of p.grades) {
-        saida += '   ||   ' + String(num);
+        saida += `Nota ${p.grades.indexOf(num) + 1} = ` + String(num) + '\n';
       }
       setListagem(saida);
     }
@@ -46,12 +49,12 @@ export default function Overview({route, navigation}) {
       'Você está tentando apagar uma matéria. Confirme ou negue a requisição.',
       [
         {
-          text: 'Não!',
+          text: 'Não',
           onPress: () => console.log('Cancel Pressed'),
           style: 'cancel',
         },
         {
-          text: 'Certeza!',
+          text: 'Certeza',
           onPress: () => {
             let subs = realm.objects('Repository');
             let specificsub = subs.filtered(`materia = "${name}"`);
@@ -84,6 +87,10 @@ export default function Overview({route, navigation}) {
 
   const Go = () => {
     navigation.navigate('Root', {screen: 'InsertData', params: {name: name}});
+  };
+
+  const DeleteGrade = () => {
+    navigation.navigate('Root', {screen: 'DeleteGrade', params: {name: name}});
   };
 
   const Back = () => {
@@ -147,10 +154,11 @@ export default function Overview({route, navigation}) {
           <Name>{name}</Name>
           <Details>Objetivo de média: {goal}</Details>
           <Details>Média atual: {parseFloat(media).toFixed(2)}</Details>
-          <Details>Histórico de notas: {listagem}</Details>
           <Details>Faltam {restante} pontos até o objetivo.</Details>
           <YourNotes>Suas Anotações:</YourNotes>
           <Notes>{notes}</Notes>
+          <History>Histórico de notas: </History>
+          <Grades>{listagem}</Grades>
         </Stats>
 
         <InserirDados onPress={Go}>
@@ -163,9 +171,14 @@ export default function Overview({route, navigation}) {
           <Text>Voltar</Text>
         </Voltar>
 
+        <DeleteButton onPress={DeleteGrade}>
+          <Icon name="trash" color="#fff" size={32} />
+          <Text>Excluir nota</Text>
+        </DeleteButton>
+
         <DeleteButton title="Voltar" onPress={deleteSubject}>
           <Icon name="minus-circle" color="#fff" size={32} />
-          <Text>Apagar</Text>
+          <Text>Apagar Matéria</Text>
         </DeleteButton>
       </Container>
     </ScrollView>
