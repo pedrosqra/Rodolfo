@@ -82,7 +82,6 @@ export const Voltar = styled.TouchableOpacity`
   border-radius: 8px;
   padding: 25px 14px;
   height: 6px;
-  paddingRight: 20px;
   margin-top: 15px;
   flex-direction: row;
   align-items: center;

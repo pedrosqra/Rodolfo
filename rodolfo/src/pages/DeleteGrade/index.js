@@ -34,9 +34,10 @@ export default function Delete({route, navigation}) {
     let saida = '';
 
     for (let p of gradesdb) {
+      let count = 1;
       for (let num of p.grades) {
-        saida +=
-          `\nNota ${p.grades.indexOf(num) + 1}:   ` + String(num) + '  \n';
+        saida += `\nNota ${count}:   ` + String(num) + '  \n';
+        count += 1;
       }
       setListagem(saida);
     }
