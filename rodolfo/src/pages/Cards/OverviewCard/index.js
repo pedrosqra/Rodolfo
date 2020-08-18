@@ -23,6 +23,7 @@ export default function Overview({route, navigation}) {
   const [restante, setRestante] = useState(0);
   const {name, goal, notes} = route.params;
   const [media, setMedia] = useState(0);
+
   const {height} = Dimensions.get('window');
   const [screenHeight, setHeight] = useState(0);
 
@@ -34,9 +35,11 @@ export default function Overview({route, navigation}) {
 
     // eslint-disable-next-line no-unused-vars
     for (let p of gradesdb) {
+      let count = 1;
       // eslint-disable-next-line no-unused-vars
       for (let num of p.grades) {
-        saida += `Nota ${p.grades.indexOf(num) + 1}:  ` + String(num) + '\n\n';
+        saida += `Nota ${count}:  ` + String(num) + '\n\n';
+        count += 1;
       }
       setListagem(saida);
     }
@@ -144,7 +147,7 @@ export default function Overview({route, navigation}) {
   function onContentSizeChange(contentWidth, contentHeight) {
     setHeight(contentHeight);
   }
-  const scrollEnabled = screenHeight > height;
+  const scrollEnabled = screenHeight > height - 60;
   return (
     <ScrollView
       scrollEnabled={scrollEnabled}
@@ -172,12 +175,12 @@ export default function Overview({route, navigation}) {
         </Voltar>
 
         <DeleteButton onPress={DeleteGrade}>
-          <Icon name="trash" color="#fff" size={32} />
+          <Icon name="minus-circle" color="#fff" size={32} />
           <Text>Excluir nota</Text>
         </DeleteButton>
 
         <DeleteButton title="Voltar" onPress={deleteSubject}>
-          <Icon name="minus-circle" color="#fff" size={32} />
+          <Icon name="ban" color="#fff" size={32} />
           <Text>Apagar Matéria</Text>
         </DeleteButton>
       </Container>

@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import styled from 'styled-components/native';
 
 export const YourNotes = styled.Text`
@@ -37,6 +38,11 @@ export const Container = styled.View`
   width: 100%;
 `;
 
+export const ButtonsContainer = styled.View`
+  flex-direction: row;
+  justify-content: space-evenly;
+`;
+
 export const Name = styled.Text`
   margin-top: 15px
   flex-direction: row;
@@ -58,18 +64,6 @@ export const History = styled.Text`
   margin-top: 25px;
 `;
 
-export const Voltar = styled.TouchableOpacity`
-  background: #6bd4c1;
-  margin-left: 20px;
-  margin-right: 20px;
-  border-radius: 8px;
-  padding: 25px 14px;
-  margin-top: 15px;
-  height: 6px;
-  flex-direction: row;
-  align-items: center;
-`;
-
 export const InserirDados = styled.TouchableOpacity`
   background: #6bd4c1;
   margin-left: 20px;
@@ -83,15 +77,23 @@ export const InserirDados = styled.TouchableOpacity`
   align-items: center;
 `;
 
-export const DeleteButton = styled.TouchableOpacity`
-  background: #ff0000;
-  margin-left: 20px;
-  margin-right: 20px;
-  flex-direction: row;
+export const Voltar = styled.TouchableOpacity`
+  background: #6bd4c1;
   border-radius: 8px;
   padding: 25px 14px;
   height: 6px;
-  margin-top: 20px;
+  paddingRight: 20px;
+  margin-top: 15px;
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const DeleteButton = styled.TouchableOpacity`
+  background: #ff0000;
+  border-radius: 8px;
+  padding: 25px 14px;
+  height: 6px;
+  margin-top: 15px;
   flex-direction: row;
   align-items: center;
 `;

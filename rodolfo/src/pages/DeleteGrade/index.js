@@ -15,15 +15,17 @@ import {
   Input,
   Grades,
   History,
+  ButtonsContainer,
 } from './styles';
 
 export default function Delete({route, navigation}) {
   const [listagem, setListagem] = useState('');
-  const {name, goal, notes} = route.params;
-  const {height} = Dimensions.get('window');
-  const [screenHeight, setHeight] = useState(0);
+  const {name} = route.params;
   const [id, setId] = useState();
   const [error, setError] = useState(false);
+
+  const {height} = Dimensions.get('window');
+  const [screenHeight, setHeight] = useState(0);
 
   async function listagemNotas() {
     const realm = await getRealm();
@@ -58,10 +60,6 @@ export default function Delete({route, navigation}) {
     });
   }
 
-  function onContentSizeChange(contentWidth, contentHeight) {
-    setHeight(contentHeight);
-  }
-
   function onBackPress() {
     return true;
   }
@@ -74,41 +72,51 @@ export default function Delete({route, navigation}) {
     BackHandler.addEventListener('hardwareBackPress', onBackPress);
   }
 
-  const scrollEnabled = screenHeight > height;
+  function onContentSizeChange(contentWidth, contentHeight) {
+    setHeight(contentHeight);
+  }
+
+  const scrollEnabled = screenHeight > height - 50;
 
   listagemNotas();
   componentDidMount();
 
   return (
-    <Container>
-      <Stats>
-        <Name>{name}</Name>
-        <History>Histórico de notas:</History>
-        <Grades>{listagem}</Grades>
-      </Stats>
+    <ScrollView
+      scrollEnabled={scrollEnabled}
+      onContentSizeChange={onContentSizeChange}>
+      <Container>
+        <Stats>
+          <Name>{name}</Name>
+          <History>Histórico de notas:</History>
+          <Grades>{listagem}</Grades>
+        </Stats>
 
-      <Form>
-        <Input
-          blurOnSubmit={true}
-          value={id}
-          error={error}
-          onChangeText={setId}
-          autoCapitalize="none"
-          autoCorrect={false}
-          placeholder="Ex: 2, para excluir 'Nota 2'"
-          keyboardType="numeric"
-        />
-      </Form>
+        <Form>
+          <Input
+            blurOnSubmit={true}
+            value={id}
+            error={error}
+            onChangeText={setId}
+            autoCapitalize="none"
+            autoCorrect={false}
+            placeholder="Ex: 2, para excluir 'Nota 2'"
+            keyboardType="numeric"
+          />
+        </Form>
 
-      <DeleteButton onPress={DeleteGrade}>
-        <Icon name="trash" color="#fff" size={32} />
-        <Text>Deletar</Text>
-      </DeleteButton>
+        <ButtonsContainer>
+          <Voltar title="Voltar" onPress={Back}>
+            <Icon name="arrow-circle-left" color="#fff" size={32} />
+            <Text>Voltar</Text>
+          </Voltar>
 
-      <Voltar title="Voltar" onPress={Back}>
-        <Icon name="arrow-circle-left" color="#fff" size={32} />
-        <Text>Voltar</Text>
-      </Voltar>
-    </Container>
+          <DeleteButton onPress={DeleteGrade}>
+            <Icon name="minus-circle" color="#fff" size={32} />
+            <Text>Deletar</Text>
+          </DeleteButton>
+        </ButtonsContainer>
+      </Container>
+    </ScrollView>
   );
 }
