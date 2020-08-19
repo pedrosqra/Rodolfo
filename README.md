@@ -1,4 +1,4 @@
-# Rodolfo
+# :closed_book: Rodolfo
 A class manager built with React Native and Realm.
 
 ## :question: About the project
@@ -16,19 +16,19 @@ The main goal of this project is to get us started in Javascript, React Native a
 
 ### :triangular_flag_on_post: Getting started
 
-1. First, run yarn install inside the folder named rodolfo
+1. First, run yarn install inside the folder named rodolfo.
 
 ```sh
 yarn install
 ```
 
-2. After that, run npx react-native run-android to use this app in your Android device via USB cable. Make sure you already have a [React-Native environment](https://reactnative.dev/docs/environment-setup) setup
+2. After that, run npx react-native run-android to use this app in your Android device via USB cable. Make sure you already have a [React-Native environment](https://reactnative.dev/docs/environment-setup) setup ready.
 
 ```sh
 npx react-native run-android
 ```
 
-3. Then, open a new tab in your terminal an run yarn star.
+3. Then, open a new tab in your terminal an run yarn start.
 
 ```sh
 yarn start
