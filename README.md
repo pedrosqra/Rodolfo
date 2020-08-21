@@ -34,7 +34,7 @@ yarn install
 npx react-native run-android
 ```
 
-3. Then, open a new tab in your terminal an run yarn start.
+3. Then, open a new tab in your terminal and run yarn start.
 
 ```sh
 yarn start
