@@ -9,7 +9,7 @@ The main goal of this project is to get us started in Javascript, React Native a
 
 
 ![Home](https://i.imgur.com/T6udp5Am.jpg) ![drawer](https://i.imgur.com/X130NQ6m.jpg) ![drawer](https://i.imgur.com/gaQAonam.jpg)
-![add](https://i.imgur.com/ygXwcsKm.jpg)
+![add](https://i.imgur.com/Bg1eMRym.jpg)
 
 ###  :hammer: Made with
 
