@@ -124,7 +124,6 @@ export default function Overview({route, navigation, props}) {
           autoCapitalize="none"
           autoCorrect={false}
           placeholder="Nova nota"
-          keyboardType="numeric"
         />
       </Form>
 

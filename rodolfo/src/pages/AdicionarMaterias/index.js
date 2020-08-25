@@ -78,7 +78,6 @@ export default function App() {
             autoCapitalize="none"
             autoCorrect={false}
             placeholder="Objetivo"
-            keyboardType = "numeric"
           />
         </Form>
 
