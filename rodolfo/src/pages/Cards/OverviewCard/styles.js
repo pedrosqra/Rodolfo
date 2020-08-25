@@ -72,7 +72,7 @@ export const Voltar = styled.TouchableOpacity`
   margin-right: 20px;
   border-radius: 8px;
   padding: 25px 14px;
-  margin-top: 15px;
+  margin-top: -15px;
   height: 6px;
   flex-direction: row;
   align-items: center;
@@ -86,7 +86,7 @@ export const InserirDados = styled.TouchableOpacity`
   border-radius: 8px;
   padding: 25px 14px;
   height: 6px;
-  margin-top: -15px;
+  margin-top: 15px;
   flex-direction: row;
   align-items: center;
 `;
@@ -99,7 +99,7 @@ export const DeleteButton = styled.TouchableOpacity`
   border-radius: 8px;
   padding: 25px 14px;
   height: 6px;
-  margin-top: 20px;
+  margin-top: 15px;
   flex-direction: row;
   align-items: center;
 `;

@@ -164,15 +164,15 @@ export default function Overview({route, navigation}) {
           <Grades>{listagem}</Grades>
         </Stats>
 
-        <InserirDados onPress={Go}>
-          <Icon name="plus-circle" color="#fff" size={32} />
-          <Text>Inserir Dados</Text>
-        </InserirDados>
-
         <Voltar title="Voltar" onPress={Back}>
           <Icon name="arrow-circle-left" color="#fff" size={32} />
           <Text>Voltar</Text>
         </Voltar>
+
+        <InserirDados onPress={Go}>
+          <Icon name="plus-circle" color="#fff" size={32} />
+          <Text>Inserir Dados</Text>
+        </InserirDados>
 
         <DeleteButton onPress={DeleteGrade}>
           <Icon name="minus-circle" color="#fff" size={32} />
