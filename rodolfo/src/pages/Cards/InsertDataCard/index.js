@@ -127,14 +127,14 @@ export default function Overview({route, navigation, props}) {
         />
       </Form>
 
-      <Submit onPress={handleAddRepository}>
-        <Icon name="plus-circle" size={32} color="#FFF" />
-        <Text>Adicionar</Text>
-      </Submit>
-
       <Submit title="Voltar" onPress={pressHandler}>
         <Icon name="arrow-circle-left" size={32} color="#FFF" />
         <Text>Voltar</Text>
+      </Submit>
+
+      <Submit onPress={handleAddRepository}>
+        <Icon name="plus-circle" size={32} color="#FFF" />
+        <Text>Adicionar</Text>
       </Submit>
     </Container>
   );
