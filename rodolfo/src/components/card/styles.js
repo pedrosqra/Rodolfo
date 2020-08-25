@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
 export const Container = styled(LinearGradient).attrs({
-  colors: ['#ADD8E6', '#4169E1'],
+  colors: ['#99cfe0', '#4169E1'],
   start: {x: 0, y: 0},
   end: {x: 1, y: 1},
 })`
@@ -11,7 +11,9 @@ export const Container = styled(LinearGradient).attrs({
 
 export const CardContent = styled.Text`
   color: #fff;
+  font-size: 12px;
   margin-top: 370px;
+  font-weight: bold;
 `;
 
 export const CardTitle = styled.Text`
