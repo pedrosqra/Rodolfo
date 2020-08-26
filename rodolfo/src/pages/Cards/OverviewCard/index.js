@@ -1,8 +1,11 @@
 import React, {useState} from 'react';
-import {ScrollView, Dimensions} from 'react-native';
+import {ScrollView, Dimensions, BackHandler, Alert} from 'react-native';
+
 import getRealm from '../../../../services/realm';
+
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {BackHandler, Alert} from 'react-native';
+import Emoji from 'react-native-emoji';
+
 import {
   Text,
   Container,
@@ -16,6 +19,7 @@ import {
   DeleteButton,
   Grades,
   History,
+  DetailsContainer,
 } from './styles';
 
 export default function Overview({route, navigation}) {
@@ -23,7 +27,6 @@ export default function Overview({route, navigation}) {
   const [restante, setRestante] = useState(0);
   const {name, goal, notes} = route.params;
   const [media, setMedia] = useState(0);
-
   const {height} = Dimensions.get('window');
   const [screenHeight, setHeight] = useState(0);
 
@@ -131,7 +134,7 @@ export default function Overview({route, navigation}) {
     });
   }
 
-  function componentDidMount() {
+  function preventGoingBack() {
     BackHandler.addEventListener('hardwareBackPress', onBackPress);
   }
 
@@ -139,7 +142,7 @@ export default function Overview({route, navigation}) {
     return true;
   }
 
-  componentDidMount();
+  preventGoingBack();
   avgArray();
   listagemNotas();
   restantes();
@@ -147,17 +150,25 @@ export default function Overview({route, navigation}) {
   function onContentSizeChange(contentWidth, contentHeight) {
     setHeight(contentHeight);
   }
-  const scrollEnabled = screenHeight > height - 60;
+  const scrollEnabled = screenHeight > height - 70;
+
   return (
     <ScrollView
       scrollEnabled={scrollEnabled}
       onContentSizeChange={onContentSizeChange}>
       <Container>
+        <DetailsContainer>
+          <Stats>
+            <Name>
+              {<Emoji name=":green_book:" />}
+              {name}
+            </Name>
+            <Details>Objetivo de média: {goal}</Details>
+            <Details>Média atual: {parseFloat(media).toFixed(2)}</Details>
+            <Details>Faltam {restante} pontos até o objetivo.</Details>
+          </Stats>
+        </DetailsContainer>
         <Stats>
-          <Name>{name}</Name>
-          <Details>Objetivo de média: {goal}</Details>
-          <Details>Média atual: {parseFloat(media).toFixed(2)}</Details>
-          <Details>Faltam {restante} pontos até o objetivo.</Details>
           <YourNotes>Suas Anotações:</YourNotes>
           <Notes>{notes}</Notes>
           <History>Histórico de notas: </History>

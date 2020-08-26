@@ -11,9 +11,8 @@ export const Container = styled(LinearGradient).attrs({
 
 export const CardContent = styled.Text`
   color: #fff;
-  font-size: 12px;
+  font-size: 10px;
   margin-top: 370px;
-  font-weight: bold;
 `;
 
 export const CardTitle = styled.Text`

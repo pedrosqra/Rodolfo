@@ -52,6 +52,14 @@ export const Container = styled.View`
   width: 100%;
 `;
 
+export const DetailsContainer = styled.TouchableOpacity`
+  border-radius: 8px;
+  background: #e5e5e5;
+  height: 180px;
+  width: 100%;
+  align-items: center;
+`;
+
 export const Name = styled.Text`
   margin-top: 15px
   flex-direction: row;
