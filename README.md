@@ -8,7 +8,7 @@ The main goal of this project is to get us started in Javascript, React Native a
 ### :iphone: Here's a few snapshots of the app:
 
 
-![Home](https://i.imgur.com/v04NVFLm.jpg) ![drawer](https://i.imgur.com/Udlyupfm.jpg) ![overview](https://i.imgur.com/CuoQtKkm.jpg) ![add](https://i.imgur.com/Pki5Px3m.jpg)
+![Home](https://i.imgur.com/v04NVFLm.jpg) ![drawer](https://i.imgur.com/Udlyupfm.jpg) ![overview](https://i.imgur.com/vwRhCX5m.jpg) ![add](https://i.imgur.com/Pki5Px3m.jpg)
 
 ###  :hammer: Made with
 
