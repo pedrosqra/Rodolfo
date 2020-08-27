@@ -4,6 +4,9 @@ export const YourNotes = styled.Text`
   font-size: 25px;
   font-weight: bold;
   color: #333;
+  padding: 6px;
+  border-radius: 6px;
+  background-color: #e5e5e5;
   margin-top: 25px;
 `;
 
@@ -11,6 +14,9 @@ export const History = styled.Text`
   font-size: 25px;
   font-weight: bold;
   color: #333;
+  background-color: #e5e5e5;
+  border-radius: 6px;
+  padding: 6px;
   margin-top: 25px;
 `;
 
