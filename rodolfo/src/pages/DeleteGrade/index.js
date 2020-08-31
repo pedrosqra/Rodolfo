@@ -22,6 +22,7 @@ export default function Delete({route, navigation}) {
   const [listagem, setListagem] = useState('');
   const {name} = route.params;
   const [id, setId] = useState();
+  // eslint-disable-next-line no-unused-vars
   const [error, setError] = useState(false);
 
   const {height} = Dimensions.get('window');
@@ -33,8 +34,10 @@ export default function Delete({route, navigation}) {
     let gradesdb = notasdadb.filtered(`materia BEGINSWITH "${name}"`);
     let saida = '';
 
+    // eslint-disable-next-line no-unused-vars
     for (let p of gradesdb) {
       let count = 1;
+      // eslint-disable-next-line no-unused-vars
       for (let num of p.grades) {
         saida += `\nNota ${count}:   ` + String(num) + '  \n';
         count += 1;
@@ -49,13 +52,18 @@ export default function Delete({route, navigation}) {
     let gradesdb = notasdadb.filtered(`materia BEGINSWITH "${name}"`);
 
     realm.write(() => {
+      // eslint-disable-next-line no-unused-vars
       for (let p of gradesdb) {
         if (p.grades.length !== 0) {
-          var index = p.grades.indexOf(id - 1);
           p.grades.splice(id - 1, 1);
           navigation.navigate('Root', {screen: 'Overview'});
         } else {
-          alert('Você não ainda não possui notas nessa matéria');
+          Alert.alert('Opa!', 'Você não ainda não possui essa nota.', [
+            {
+              text: 'Ok',
+              onPress: () => console.log('error'),
+            },
+          ]);
         }
       }
     });

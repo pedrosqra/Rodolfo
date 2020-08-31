@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import getRealm from '../../../../services/realm';
 import {Container, Form, Input, Submit, Title, Text} from './styles';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {BackHandler} from 'react-native';
+import {BackHandler, Alert} from 'react-native';
 
 export default function Overview({route, navigation, props}) {
   const {name} = route.params;
@@ -24,22 +24,30 @@ export default function Overview({route, navigation, props}) {
     return true;
   }
 
-  async function handleAddRepository() {
+  async function handleAddData() {
     try {
-      saveRepository();
+      saveData();
       console.log('deu certo');
-      // eslint-disable-next-line no-alert
-      alert('Nota adicionada com sucesso.');
+      Alert.alert('Nota adicionada com sucesso!', 'Tudo certo :)', [
+        {
+          text: 'Ok',
+          onPress: () => console.log('success'),
+        },
+      ]);
       setError(false);
     } catch (err) {
       setError(true);
       console.log('não cadastrou');
-      // eslint-disable-next-line no-alert
-      alert('Erro, tente novamente');
+      Alert.alert('Erro', 'Tente novamente.', [
+        {
+          text: 'Ok',
+          onPress: () => console.log('error'),
+        },
+      ]);
     }
   }
 
-  async function saveRepository() {
+  async function saveData() {
     const realm = await getRealm();
     let notasdadb = realm.objects('Repository');
     let gradesdb = notasdadb.filtered(`materia BEGINSWITH "${name}"`);
@@ -121,7 +129,7 @@ export default function Overview({route, navigation, props}) {
         <Text>Voltar</Text>
       </Submit>
 
-      <Submit onPress={handleAddRepository}>
+      <Submit onPress={handleAddData}>
         <Icon name="plus-circle" size={32} color="#FFF" />
         <Text>Adicionar</Text>
       </Submit>

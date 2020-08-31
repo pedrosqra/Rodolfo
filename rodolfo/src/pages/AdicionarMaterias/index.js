@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import React, { useState } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {StatusBar} from 'react-native';
+import {StatusBar, Alert} from 'react-native';
 
 import getRealm from '../../../services/realm';
 
@@ -32,8 +32,16 @@ export default function App() {
     try {
       saveRepository();
       console.log('deu certo');
-      // eslint-disable-next-line no-alert
-      alert('Matéria cadastrada com sucesso');
+      Alert.alert(
+        'Matéria adicionada com sucesso!',
+        ':)',
+        [
+          {
+            text: 'Ok',
+            onPress: () => console.log('success'),
+          },
+        ],
+      );
       setMateria('');
       setGoal('');
       setError(false);
@@ -42,6 +50,16 @@ export default function App() {
       console.log('não cadastrou');
       // eslint-disable-next-line no-alert
       alert('Erro, tente novamente');
+      Alert.alert(
+        'Erro',
+        'Tente novamente.',
+        [
+          {
+            text: 'Ok',
+            onPress: () => console.log('error'),
+          },
+        ],
+      );
     }
   }
 
@@ -83,6 +101,7 @@ export default function App() {
 
         <Submit onPress={handleAddRepository}>
             <Icon name="plus-circle" size={32} color="#FFF" />
+            <Texto>Adicionar</Texto>
         </Submit>
 
 
