@@ -5,7 +5,6 @@ export const YourNotes = styled.Text`
   font-weight: bold;
   color: #333;
   padding: 8px;
-
 `;
 
 export const History = styled.Text`
@@ -45,7 +44,6 @@ export const Text = styled.Text`
 export const Stats = styled.View`
   align-items: flex-start;
 
-
   justify-content: space-between;
 `;
 export const Container = styled.View`
@@ -58,22 +56,22 @@ export const Container = styled.View`
 
 export const ContainerTitle = styled.View`
   background: #e5e5e5;
-  height: 50px;
-  width: 340px;
+  height: 30%;
+  width: 80%;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-
 `;
 
 export const ContainerNotes = styled.View`
-font-weight: bold;
-border-radius: 6px;
-margin-top: 25px;
-flex-direction: row;
-background-color: #e5e5e5;
-height: 50px;
-width: 100%;
+  font-weight: bold;
+  border-radius: 6px;
+  margin-top: 25px;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  background-color: #e5e5e5;
 `;
 
 export const DetailsContainer = styled.TouchableOpacity`
@@ -124,14 +122,7 @@ export const InserirDados = styled.TouchableOpacity`
 `;
 
 export const InserirNotas = styled.TouchableOpacity`
-  background: #FFD700	;
-  margin-left: 90px;
-  flex-direction: row;
-  border-radius: 8px;
-  padding: 18px 5px;
-  height: 6px;
-  align-items: center;
-  margin-top: 7px;
+  margin-left: 80px;
 `;
 
 export const DeleteButton = styled.TouchableOpacity`
@@ -139,12 +130,13 @@ export const DeleteButton = styled.TouchableOpacity`
   border-radius: 8px;
   padding: 18px 8px;
   margin-top: 20px;
+  margin-left: 60px;
   flex-direction: row;
   align-items: center;
 `;
 
 export const DeleteButtonGrade = styled.TouchableOpacity`
-  background: #DC143C;
+  background: #dc143c;
   margin-left: 20px;
   margin-right: 20px;
   flex-direction: row;

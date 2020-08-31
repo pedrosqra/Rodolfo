@@ -1,4 +1,3 @@
-
 import React, {useState} from 'react';
 
 import getRealm from '../../../../services/realm';
@@ -6,9 +5,10 @@ import {Container, Form, Input, Submit, Title, Text} from './styles';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {BackHandler} from 'react-native';
 
-export default function Overview({route, navigation, props}) {
+export default function InsertNotes({route, navigation, props}) {
   const {name} = route.params;
   const [stringNotes, setString] = useState('');
+  // eslint-disable-next-line no-unused-vars
   const [grade, setGrade] = useState(0);
   const [error, setError] = useState(false);
 
@@ -102,7 +102,6 @@ export default function Overview({route, navigation, props}) {
 
   return (
     <Container>
-
       <Title>Inserir Nota</Title>
 
       <Form>
@@ -116,7 +115,6 @@ export default function Overview({route, navigation, props}) {
           keyboardType="default"
         />
       </Form>
-
 
       <Submit title="Voltar" onPress={pressHandler}>
         <Icon name="arrow-circle-left" size={32} color="#FFF" />

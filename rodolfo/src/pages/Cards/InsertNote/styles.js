@@ -5,7 +5,6 @@ export const YourNotes = styled.Text`
   font-weight: bold;
   color: #333;
   padding: 8px;
-
 `;
 
 export const History = styled.Text`
@@ -45,7 +44,6 @@ export const Text = styled.Text`
 export const Stats = styled.View`
   align-items: flex-start;
 
-
   justify-content: space-between;
 `;
 export const Container = styled.View`
@@ -63,17 +61,16 @@ export const ContainerTitle = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-
 `;
 
 export const ContainerNotes = styled.View`
-font-weight: bold;
-border-radius: 6px;
-margin-top: 25px;
-flex-direction: row;
-background-color: #e5e5e5;
-height: 50px;
-width: 100%;
+  font-weight: bold;
+  border-radius: 6px;
+  margin-top: 25px;
+  flex-direction: row;
+  background-color: #e5e5e5;
+  height: 50px;
+  width: 100%;
 `;
 
 export const DetailsContainer = styled.TouchableOpacity`
@@ -124,7 +121,7 @@ export const InserirDados = styled.TouchableOpacity`
 `;
 
 export const InserirNotas = styled.TouchableOpacity`
-  background: #FFD700	;
+  background: #ffd700;
   margin-left: 90px;
   flex-direction: row;
   border-radius: 8px;
@@ -144,7 +141,7 @@ export const DeleteButton = styled.TouchableOpacity`
 `;
 
 export const DeleteButtonGrade = styled.TouchableOpacity`
-  background: #DC143C;
+  background: #dc143c;
   margin-left: 20px;
   margin-right: 20px;
   flex-direction: row;
