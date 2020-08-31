@@ -15,6 +15,7 @@ flex-direction: row;
 font-size: 25px;
 font-weight: bold;
 color: #333b;
+margin-left: 20px
 `;
 
 export const Container = styled.View`

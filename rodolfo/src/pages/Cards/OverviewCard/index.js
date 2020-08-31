@@ -16,10 +16,14 @@ import {
   YourNotes,
   Voltar,
   InserirDados,
+  InserirNotas,
   DeleteButton,
+  DeleteButtonGrade,
   Grades,
   History,
   DetailsContainer,
+  ContainerTitle,
+  ContainerNotes,
 } from './styles';
 
 export default function Overview({route, navigation}) {
@@ -95,6 +99,10 @@ export default function Overview({route, navigation}) {
     navigation.navigate('Root', {screen: 'InsertData', params: {name: name}});
   };
 
+  const NewNote = () => {
+    navigation.navigate('Root', {screen: 'NewNote'});
+  };
+
   const DeleteGrade = () => {
     navigation.navigate('Root', {screen: 'DeleteGrade', params: {name: name}});
   };
@@ -159,17 +167,32 @@ export default function Overview({route, navigation}) {
       <Container>
         <DetailsContainer>
           <Stats>
-            <Name>
-              {<Emoji name=":green_book:" />}
-              {name}
-            </Name>
+            <ContainerTitle>
+              <Name>
+                {<Emoji name=":green_book:" />}
+                {name}
+
+              </Name>
+
+              <DeleteButton title="Voltar" onPress={deleteSubject}>
+                <Icon name="trash" color="#DC143C" size={32} />
+              </DeleteButton>
+            </ContainerTitle>
+            
             <Details>Objetivo de média: {goal}</Details>
             <Details>Média atual: {parseFloat(media).toFixed(2)}</Details>
             <Details>Faltam {restante} pontos até o objetivo.</Details>
           </Stats>
         </DetailsContainer>
         <Stats>
-          <YourNotes>Suas Anotações:</YourNotes>
+          <ContainerNotes>
+            <YourNotes>Suas Anotações:</YourNotes>
+
+            <InserirNotas onPress={NewNote}>
+              <Icon name="pencil" color="#fff" size={32} />
+            </InserirNotas>
+          </ContainerNotes>
+          
           <Notes>{notes}</Notes>
           <History>Histórico de notas: </History>
           <Grades>{listagem}</Grades>
@@ -181,19 +204,16 @@ export default function Overview({route, navigation}) {
         </Voltar>
 
         <InserirDados onPress={Go}>
-          <Icon name="plus-circle" color="#fff" size={32} />
-          <Text>Inserir Dados</Text>
+          <Icon name="plus" color="#fff" size={32} />
+          <Text>Nova nota</Text>
         </InserirDados>
 
-        <DeleteButton onPress={DeleteGrade}>
+        <DeleteButtonGrade onPress={DeleteGrade}>
           <Icon name="minus-circle" color="#fff" size={32} />
           <Text>Excluir nota</Text>
-        </DeleteButton>
+        </DeleteButtonGrade>
 
-        <DeleteButton title="Voltar" onPress={deleteSubject}>
-          <Icon name="ban" color="#fff" size={32} />
-          <Text>Apagar Matéria</Text>
-        </DeleteButton>
+        
       </Container>
     </ScrollView>
   );

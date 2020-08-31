@@ -3,12 +3,11 @@ import React, {useState} from 'react';
 import getRealm from '../../../../services/realm';
 import {Container, Form, Input, Submit, Title, Text} from './styles';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {BackHandler, Alert} from 'react-native';
+import {BackHandler} from 'react-native';
 
-export default function Overview({route, navigation, props}) {
+export default function NewNote({route, navigation, props}) {
   const {name} = route.params;
   const [stringNotes, setString] = useState('');
-  const [grade, setGrade] = useState(0);
   const [error, setError] = useState(false);
 
   const pressHandler = () => {
@@ -24,30 +23,22 @@ export default function Overview({route, navigation, props}) {
     return true;
   }
 
-  async function handleAddData() {
+  async function handleAddRepository() {
     try {
-      saveData();
+      saveRepository();
       console.log('deu certo');
-      Alert.alert('Nota adicionada com sucesso!', 'Tudo certo :)', [
-        {
-          text: 'Ok',
-          onPress: () => console.log('success'),
-        },
-      ]);
+      // eslint-disable-next-line no-alert
+      alert('Nota adicionada com sucesso.');
       setError(false);
     } catch (err) {
       setError(true);
       console.log('não cadastrou');
-      Alert.alert('Erro', 'Tente novamente.', [
-        {
-          text: 'Ok',
-          onPress: () => console.log('error'),
-        },
-      ]);
+      // eslint-disable-next-line no-alert
+      alert('Erro, tente novamente');
     }
   }
 
-  async function saveData() {
+  async function saveRepository() {
     const realm = await getRealm();
     let notasdadb = realm.objects('Repository');
     let gradesdb = notasdadb.filtered(`materia BEGINSWITH "${name}"`);
@@ -109,18 +100,16 @@ export default function Overview({route, navigation, props}) {
 
   return (
     <Container>
-
-      <Title>Inserir Nota</Title>
-
+      <Title>Escreva uma anotação</Title>
       <Form>
         <Input
-          blurOnSubmit={true}
-          value={grade}
+          value={stringNotes}
           error={error}
-          onChangeText={setGrade}
+          onChangeText={setString}
           autoCapitalize="none"
           autoCorrect={false}
-          placeholder="Nova nota"
+          placeholder="Anotações"
+          keyboardType="default"
         />
       </Form>
 
@@ -129,7 +118,7 @@ export default function Overview({route, navigation, props}) {
         <Text>Voltar</Text>
       </Submit>
 
-      <Submit onPress={handleAddData}>
+      <Submit onPress={handleAddRepository}>
         <Icon name="plus-circle" size={32} color="#FFF" />
         <Text>Adicionar</Text>
       </Submit>

@@ -9,6 +9,7 @@ import Overview from './pages/Cards/OverviewCard/index';
 import InsertData from './pages/Cards/InsertDataCard/index';
 import Adicionar from './pages/AdicionarMaterias/index';
 import DeleteGrade from './pages/DeleteGrade/index';
+import NewNote from './pages/Cards/InsertNote/index';
 
 import Header from './components/header/index';
 import Card from './components/card/index';
@@ -54,6 +55,11 @@ function Root({navigation}) {
         options={{headerLeft: null, headerTitle: 'Excluir Nota'}}
         name="DeleteGrade"
         component={DeleteGrade}
+      />
+      <Stack.Screen
+        options={{headerLeft: null, headerTitle: 'Nova Anotação'}}
+        name="NewNote"
+        component={NewNote}
       />
     </Stack.Navigator>
   );
