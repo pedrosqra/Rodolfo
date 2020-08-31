@@ -11,7 +11,6 @@ export default function Overview({route, navigation, props}) {
   const [error, setError] = useState(false);
 
   const pressHandler = () => {
-    avgArray();
     navigation.navigate('Root', {screen: 'Overview'});
   };
 
@@ -58,38 +57,6 @@ export default function Overview({route, navigation, props}) {
           `  ${p.grades.push(parseFloat(grade))}`;
         }
       }
-    });
-  }
-
-  const [media, setMedia] = useState(0);
-  async function avgArray() {
-    const realm = await getRealm();
-    let notasdadb = realm.objects('Repository');
-    let gradesdb = notasdadb.filtered(`materia BEGINSWITH "${name}"`);
-    var sum = 0;
-    var size = 0;
-
-    // eslint-disable-next-line no-unused-vars
-    for (let p of gradesdb) {
-      size += parseFloat(p.grades.length);
-
-      // eslint-disable-next-line no-unused-vars
-      for (let num of p.grades) {
-        sum += num;
-      }
-      if (parseFloat(p.grades.length) === 0) {
-        setMedia('0');
-      } else {
-        setMedia(sum / size);
-      }
-    }
-
-    realm.write(() => {
-      realm.create(
-        'Repository',
-        {materia: `${name}`, average: `${media}`},
-        'modified',
-      );
     });
   }
 

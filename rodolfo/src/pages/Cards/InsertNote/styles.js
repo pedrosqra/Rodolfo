@@ -55,30 +55,3 @@ export const Submit = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
 `;
-
-33;
-
-export const Voltar = styled.TouchableOpacity`
-  background: #6bd4c1;
-  margin-left: 20px;
-  margin-right: 20px;
-  border-radius: 8px;
-  padding: 25px 14px;
-  margin-top: 15px;
-  height: 6px;
-  flex-direction: row;
-  align-items: center;
-`;
-
-export const InserirDados = styled.TouchableOpacity`
-  background: #6bd4c1;
-  margin-left: 20px;
-  margin-right: 20px;
-  flex-direction: row;
-  border-radius: 8px;
-  padding: 25px 14px;
-  height: 6px;
-  margin-top: 20px;
-  flex-direction: row;
-  align-items: center;
-`;

@@ -3,17 +3,14 @@ import React, {useState} from 'react';
 import getRealm from '../../../../services/realm';
 import {Container, Form, Input, Submit, Title, Text} from './styles';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {BackHandler} from 'react-native';
+import {BackHandler, Alert} from 'react-native';
 
 export default function InsertNotes({route, navigation}) {
   const {name} = route.params;
   const [stringNotes, setString] = useState('');
-  // eslint-disable-next-line no-unused-vars
-  const [grade, setGrade] = useState(0);
   const [error, setError] = useState(false);
 
   const pressHandler = () => {
-    avgArray();
     navigation.navigate('Root', {screen: 'Overview'});
   };
 
@@ -29,21 +26,30 @@ export default function InsertNotes({route, navigation}) {
     try {
       saveRepository();
       console.log('deu certo');
-      // eslint-disable-next-line no-alert
-      alert('Nota adicionada com sucesso.');
+
+      Alert.alert('Anotação adicionada', ':)', [
+        {
+          text: 'Ok',
+          onPress: () => console.log('success'),
+        },
+      ]);
       setError(false);
     } catch (err) {
       setError(true);
       console.log('não cadastrou');
-      // eslint-disable-next-line no-alert
-      alert('Erro, tente novamente');
+
+      Alert.alert('Erro', 'Tente novamente.', [
+        {
+          text: 'Ok',
+          onPress: () => console.log('error'),
+        },
+      ]);
     }
   }
 
   async function saveRepository() {
     const realm = await getRealm();
     let notasdadb = realm.objects('Repository');
-    let gradesdb = notasdadb.filtered(`materia BEGINSWITH "${name}"`);
     let notesdb = notasdadb.filtered(`materia BEGINSWITH "${name}"`);
 
     realm.write(() => {
@@ -57,44 +63,6 @@ export default function InsertNotes({route, navigation}) {
           }
         }
       }
-      if (grade !== 0) {
-        // eslint-disable-next-line no-unused-vars
-        for (let p of gradesdb) {
-          `  ${p.grades.push(parseFloat(grade))}`;
-        }
-      }
-    });
-  }
-
-  const [media, setMedia] = useState(0);
-  async function avgArray() {
-    const realm = await getRealm();
-    let notasdadb = realm.objects('Repository');
-    let gradesdb = notasdadb.filtered(`materia BEGINSWITH "${name}"`);
-    var sum = 0;
-    var size = 0;
-
-    // eslint-disable-next-line no-unused-vars
-    for (let p of gradesdb) {
-      size += parseFloat(p.grades.length);
-
-      // eslint-disable-next-line no-unused-vars
-      for (let num of p.grades) {
-        sum += num;
-      }
-      if (parseFloat(p.grades.length) === 0) {
-        setMedia('0');
-      } else {
-        setMedia(sum / size);
-      }
-    }
-
-    realm.write(() => {
-      realm.create(
-        'Repository',
-        {materia: `${name}`, average: `${media}`},
-        'modified',
-      );
     });
   }
 
