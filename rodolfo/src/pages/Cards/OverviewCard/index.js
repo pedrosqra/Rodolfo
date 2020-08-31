@@ -162,6 +162,9 @@ export default function Overview({route, navigation}) {
             <Name>
               {<Emoji name=":green_book:" />}
               {name}
+              <DeleteButton title="Voltar" onPress={deleteSubject}>
+                <Icon name="trashcan" color="#DC143C" size={32} />
+              </DeleteButton>
             </Name>
             <Details>Objetivo de média: {goal}</Details>
             <Details>Média atual: {parseFloat(media).toFixed(2)}</Details>
@@ -190,10 +193,7 @@ export default function Overview({route, navigation}) {
           <Text>Excluir nota</Text>
         </DeleteButton>
 
-        <DeleteButton title="Voltar" onPress={deleteSubject}>
-          <Icon name="ban" color="#fff" size={32} />
-          <Text>Apagar Matéria</Text>
-        </DeleteButton>
+        
       </Container>
     </ScrollView>
   );

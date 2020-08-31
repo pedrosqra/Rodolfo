@@ -108,7 +108,6 @@ export const InserirDados = styled.TouchableOpacity`
 export const DeleteButton = styled.TouchableOpacity`
   background: #ff0000;
   margin-left: 20px;
-  margin-right: 20px;
   flex-direction: row;
   border-radius: 8px;
   padding: 25px 14px;
