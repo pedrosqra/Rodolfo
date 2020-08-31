@@ -9,7 +9,7 @@ import Overview from './pages/Cards/OverviewCard/index';
 import InsertData from './pages/Cards/InsertDataCard/index';
 import Adicionar from './pages/AdicionarMaterias/index';
 import DeleteGrade from './pages/DeleteGrade/index';
-import NewNote from './pages/Cards/InsertNote/index';
+import InsertNote from './pages/Cards/InsertNote/index';
 
 import Header from './components/header/index';
 import Card from './components/card/index';
@@ -47,7 +47,7 @@ function Root({navigation}) {
         component={Overview}
       />
       <Stack.Screen
-        options={{headerLeft: null, headerTitle: 'Inserir Dados'}}
+        options={{headerLeft: null, headerTitle: 'Inserir Nota'}}
         name="InsertData"
         component={InsertData}
       />
@@ -58,8 +58,8 @@ function Root({navigation}) {
       />
       <Stack.Screen
         options={{headerLeft: null, headerTitle: 'Nova Anotação'}}
-        name="NewNote"
-        component={NewNote}
+        name="InsertNote"
+        component={InsertNote}
       />
     </Stack.Navigator>
   );

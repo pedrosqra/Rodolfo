@@ -1,3 +1,4 @@
+
 import React, {useState} from 'react';
 
 import getRealm from '../../../../services/realm';
@@ -5,9 +6,10 @@ import {Container, Form, Input, Submit, Title, Text} from './styles';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {BackHandler} from 'react-native';
 
-export default function NewNote({route, navigation, props}) {
+export default function Overview({route, navigation, props}) {
   const {name} = route.params;
   const [stringNotes, setString] = useState('');
+  const [grade, setGrade] = useState(0);
   const [error, setError] = useState(false);
 
   const pressHandler = () => {
@@ -100,7 +102,9 @@ export default function NewNote({route, navigation, props}) {
 
   return (
     <Container>
-      <Title>Escreva uma anotação</Title>
+
+      <Title>Inserir Nota</Title>
+
       <Form>
         <Input
           value={stringNotes}
@@ -112,6 +116,7 @@ export default function NewNote({route, navigation, props}) {
           keyboardType="default"
         />
       </Form>
+
 
       <Submit title="Voltar" onPress={pressHandler}>
         <Icon name="arrow-circle-left" size={32} color="#FFF" />
