@@ -99,8 +99,8 @@ export default function Overview({route, navigation}) {
     navigation.navigate('Root', {screen: 'InsertData', params: {name: name}});
   };
 
-  const NewNote = () => {
-    navigation.navigate('Root', {screen: 'NewNote'});
+  const InsertNote = () => {
+    navigation.navigate('Root', {screen: 'InsertNote'});
   };
 
   const DeleteGrade = () => {
@@ -188,7 +188,7 @@ export default function Overview({route, navigation}) {
           <ContainerNotes>
             <YourNotes>Suas Anotações:</YourNotes>
 
-            <InserirNotas onPress={NewNote}>
+            <InserirNotas onPress={InsertNote}>
               <Icon name="pencil" color="#fff" size={32} />
             </InserirNotas>
           </ContainerNotes>
