@@ -48,6 +48,7 @@ export const Stats = styled.View`
 
   justify-content: space-between;
 `;
+
 export const Container = styled.View`
   padding: 20px;
   border-radius: 8px;

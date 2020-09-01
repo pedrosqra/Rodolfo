@@ -2,7 +2,7 @@
 import React, {useState} from 'react';
 
 import getRealm from '../../../../services/realm';
-import {Container, Form, Input, Submit, Title, Text} from './styles';
+import {Container, Form, Input, Submit, Title, Text} from '../InsertNote/styles';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {BackHandler} from 'react-native';
 
