@@ -1,5 +1,5 @@
 import React from 'react';
-import {Container, CardContent, CardTitle} from './styles';
+import {Container, CardContent, CardTitle, Version} from './styles';
 import {DrawerItem} from '@react-navigation/drawer';
 import Emoji from 'react-native-emoji';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -36,6 +36,10 @@ export default function Card({navigation}) {
       <CardContent>
         Feito com {<Emoji name=":heart:" />} em Campina Grande
       </CardContent>
+
+      <Version>
+          Rodolfo v1.00.00 Beta
+      </Version>
     </Container>
   );
 }
