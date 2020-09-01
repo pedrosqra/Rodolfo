@@ -71,8 +71,8 @@ export default function Overview({route, navigation}) {
             realm.write(() => {
               realm.delete(specificsub);
             });
-            navigation.navigate('Root', {screen: 'Home'});
-            navigation.navigate('Adicionar');
+            Back();
+            AfterDeletion();
           },
         },
       ],
@@ -95,7 +95,10 @@ export default function Overview({route, navigation}) {
     setRestante(total);
   }
 
-  const Go = () => {
+  const AfterDeletion = () => {
+    navigation.navigate('Adicionar');
+  };
+  const InsertData = () => {
     navigation.navigate('Root', {screen: 'InsertData', params: {name: name}});
   };
 
@@ -202,7 +205,7 @@ export default function Overview({route, navigation}) {
           <Text>Voltar</Text>
         </Voltar>
 
-        <InserirDados onPress={Go}>
+        <InserirDados onPress={InsertData}>
           <Icon name="plus" color="#fff" size={32} />
           <Text>Nova nota</Text>
         </InserirDados>
