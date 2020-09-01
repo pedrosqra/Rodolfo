@@ -100,7 +100,7 @@ export default function Overview({route, navigation}) {
   };
 
   const InsertNote = () => {
-    navigation.navigate('Root', {screen: 'InsertNote'});
+    navigation.navigate('Root', {screen: 'InsertNote', params: {name: name}});
   };
 
   const DeleteGrade = () => {
@@ -158,7 +158,7 @@ export default function Overview({route, navigation}) {
   function onContentSizeChange(contentWidth, contentHeight) {
     setHeight(contentHeight);
   }
-  const scrollEnabled = screenHeight > height - 70;
+  const scrollEnabled = screenHeight > height + -100;
 
   return (
     <ScrollView
@@ -171,14 +171,13 @@ export default function Overview({route, navigation}) {
               <Name>
                 {<Emoji name=":green_book:" />}
                 {name}
-
               </Name>
 
               <DeleteButton title="Voltar" onPress={deleteSubject}>
                 <Icon name="trash" color="#DC143C" size={32} />
               </DeleteButton>
             </ContainerTitle>
-            
+
             <Details>Objetivo de média: {goal}</Details>
             <Details>Média atual: {parseFloat(media).toFixed(2)}</Details>
             <Details>Faltam {restante} pontos até o objetivo.</Details>
@@ -189,10 +188,10 @@ export default function Overview({route, navigation}) {
             <YourNotes>Suas Anotações:</YourNotes>
 
             <InserirNotas onPress={InsertNote}>
-              <Icon name="pencil" color="#fff" size={32} />
+              <Icon name="pencil" color="#fcd12a" size={32} />
             </InserirNotas>
           </ContainerNotes>
-          
+
           <Notes>{notes}</Notes>
           <History>Histórico de notas: </History>
           <Grades>{listagem}</Grades>
@@ -212,8 +211,6 @@ export default function Overview({route, navigation}) {
           <Icon name="minus-circle" color="#fff" size={32} />
           <Text>Excluir nota</Text>
         </DeleteButtonGrade>
-
-        
       </Container>
     </ScrollView>
   );

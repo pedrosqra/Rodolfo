@@ -1,52 +1,21 @@
 import styled from 'styled-components/native';
 
-export const YourNotes = styled.Text`
-  font-size: 25px;
-  font-weight: bold;
-  color: #333;
-  padding: 8px;
-
-`;
-
-export const History = styled.Text`
-  font-size: 25px;
-  font-weight: bold;
-  color: #333;
-  background-color: #e5e5e5;
-  border-radius: 6px;
-  padding: 6px;
-  margin-top: 25px;
-`;
-
-export const Details = styled.Text.attrs({
-  numberOfLines: 4,
-})`
-  color: #4169e1;
-  margin-top: 18px;
-  font-size: 17px;
-`;
-
-export const Grades = styled.Text.attrs({
-  numberOfLines: 100,
-})`
-  color: #4169e1;
-  margin-top: 10px;
-  font-size: 17px;
-`;
-
 export const Text = styled.Text`
   font-size: 20px;
   font-weight: bold;
+  margin-left: 10px
   color: #fff;
-  margin-left: 10px;
   justify-content: space-evenly;
 `;
 
-export const Stats = styled.View`
-  align-items: flex-start;
-
-
-  justify-content: space-between;
+export const Title = styled.Text`
+margin-top: 20px
+margin-bottom: 20px
+flex-direction: row;
+font-size: 25px;
+font-weight: bold;
+color: #333b;
+margin-left: 20px
 `;
 
 export const Container = styled.View`
@@ -57,102 +26,32 @@ export const Container = styled.View`
   width: 100%;
 `;
 
-export const ContainerTitle = styled.View`
-  background: #e5e5e5;
-  height: 50px;
-  width: 340px;
+export const Form = styled.View`
   flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-
-`;
-
-export const ContainerNotes = styled.View`
-font-weight: bold;
-border-radius: 6px;
-margin-top: 25px;
-flex-direction: row;
-background-color: #e5e5e5;
-height: 50px;
-width: 100%;
-`;
-
-export const DetailsContainer = styled.TouchableOpacity`
-  border-radius: 8px;
-  background: #e5e5e5;
-  height: 190px;
-  width: 100%;
-  align-items: center;
-`;
-
-export const Name = styled.Text`
-  margin-top: 15px
-  flex-direction: row;
-  font-size: 30px;
-  font-weight: bold;
-  color: #333;
-`;
-
-export const Notes = styled.Text`
   margin-top: 10px;
-  color: #4169d8;
-  font-size: 20px;
+  padding: 0 20px;
 `;
 
-export const Voltar = styled.TouchableOpacity`
+export const Input = styled.TextInput.attrs({
+  placeHolderTextColor: '#999',
+})`
+  flex: 1;
+  padding: 12px 15px;
+  border-radius: 6px;
+  font-size: 16px;
+  color: #333;
+  background: white;
+  border: 2px solid ${props => (props.error ? '#FF7272' : '#6bd4c1')};
+`;
+
+export const Submit = styled.TouchableOpacity`
   background: #6bd4c1;
   margin-left: 20px;
   margin-right: 20px;
   border-radius: 8px;
   padding: 25px 14px;
-  margin-top: -15px;
+  margin-top: 10px;
   height: 6px;
   flex-direction: row;
   align-items: center;
-`;
-
-export const InserirDados = styled.TouchableOpacity`
-  background: #6bd4c1;
-  margin-left: 20px;
-  margin-right: 20px;
-  flex-direction: row;
-  border-radius: 8px;
-  padding: 25px 14px;
-  height: 6px;
-  margin-top: 15px;
-  flex-direction: row;
-  align-items: center;
-`;
-
-export const InserirNotas = styled.TouchableOpacity`
-  background: #FFD700	;
-  margin-left: 90px;
-  flex-direction: row;
-  border-radius: 8px;
-  padding: 18px 5px;
-  height: 6px;
-  align-items: center;
-  margin-top: 7px;
-`;
-
-export const DeleteButton = styled.TouchableOpacity`
-  background: #e5e5e5;
-  border-radius: 8px;
-  padding: 18px 8px;
-  margin-top: 20px;
-  flex-direction: row;
-  align-items: center;
-`;
-
-export const DeleteButtonGrade = styled.TouchableOpacity`
-  background: #DC143C;
-  margin-left: 20px;
-  margin-right: 20px;
-  flex-direction: row;
-  border-radius: 8px;
-  padding: 25px 14px;
-  margin-top: 15px;
-  flex-direction: row;
-  align-items: center;
-  height: 6px;
 `;

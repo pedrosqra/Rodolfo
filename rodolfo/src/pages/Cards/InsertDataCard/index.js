@@ -7,12 +7,10 @@ import {BackHandler, Alert} from 'react-native';
 
 export default function Overview({route, navigation, props}) {
   const {name} = route.params;
-  const [stringNotes, setString] = useState('');
   const [grade, setGrade] = useState(0);
   const [error, setError] = useState(false);
 
   const pressHandler = () => {
-    avgArray();
     navigation.navigate('Root', {screen: 'Overview'});
   };
 
@@ -51,19 +49,8 @@ export default function Overview({route, navigation, props}) {
     const realm = await getRealm();
     let notasdadb = realm.objects('Repository');
     let gradesdb = notasdadb.filtered(`materia BEGINSWITH "${name}"`);
-    let notesdb = notasdadb.filtered(`materia BEGINSWITH "${name}"`);
 
     realm.write(() => {
-      if (stringNotes !== '') {
-        // eslint-disable-next-line no-unused-vars
-        for (let p of notesdb) {
-          if (p.notes.length !== 0) {
-            `  ${p.notes.push('\n' + String(stringNotes))}`;
-          } else {
-            `  ${p.notes.push(String(stringNotes))}`;
-          }
-        }
-      }
       if (grade !== 0) {
         // eslint-disable-next-line no-unused-vars
         for (let p of gradesdb) {
@@ -73,43 +60,10 @@ export default function Overview({route, navigation, props}) {
     });
   }
 
-  const [media, setMedia] = useState(0);
-  async function avgArray() {
-    const realm = await getRealm();
-    let notasdadb = realm.objects('Repository');
-    let gradesdb = notasdadb.filtered(`materia BEGINSWITH "${name}"`);
-    var sum = 0;
-    var size = 0;
-
-    // eslint-disable-next-line no-unused-vars
-    for (let p of gradesdb) {
-      size += parseFloat(p.grades.length);
-
-      // eslint-disable-next-line no-unused-vars
-      for (let num of p.grades) {
-        sum += num;
-      }
-      if (parseFloat(p.grades.length) === 0) {
-        setMedia('0');
-      } else {
-        setMedia(sum / size);
-      }
-    }
-
-    realm.write(() => {
-      realm.create(
-        'Repository',
-        {materia: `${name}`, average: `${media}`},
-        'modified',
-      );
-    });
-  }
-
   componentDidMount();
 
   return (
     <Container>
-
       <Title>Inserir Nota</Title>
 
       <Form>

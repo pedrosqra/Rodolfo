@@ -33,6 +33,7 @@ function Root({navigation}) {
   return (
     <Stack.Navigator initialRouteName="Home">
       <Stack.Screen
+        // eslint-disable-next-line no-shadow
         options={({navigation}) => {
           return {
             headerTitle: () => <Header navigation={navigation} />,
